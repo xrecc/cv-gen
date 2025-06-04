@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   SkillSet,
   HobbySet,
@@ -6,13 +7,27 @@ import {
   CertificateSet,
   LanguageSet,
 } from "./types";
+import {
+  Document,
+  Page,
+  Text,
+  Image,
+  View,
+  StyleSheet,
+  Font,
+} from "@react-pdf/renderer";
 
+Font.register({
+  family: "Roboto",
+  src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf",
+});
 interface CVelements {
+  photoUrl: string;
   firstname: string;
   lastname: string;
   email: string;
   phonenumber: number;
-  dateOfBirth: string;
+  dateOfBirth?: Date;
   city: string;
   description: string;
   skills: SkillSet[];
@@ -21,8 +36,45 @@ interface CVelements {
   educations: EducationSet[];
   certificates: CertificateSet[];
   languages: LanguageSet[];
+  clauseText: string;
+  styleCV: {
+    image: React.CSSProperties;
+    page: React.CSSProperties;
+    section: React.CSSProperties;
+  };
 }
+
+// const styles = StyleSheet.create({
+//   image: {
+//     width: "300px",
+//     height: "300px",
+//   },
+//   page: {
+//     flexDirection: "row",
+//     backgroundColor: "#E4E4E4",
+//     fontFamily: "Roboto",
+//     fontSize: 25,
+//     width: "100%",
+//     height: "100%",
+//   },
+//   section: {
+//     margin: 10,
+//     padding: 10,
+//     flexGrow: 1,
+//     textAlign: "center",
+//     // width: 200,
+//     // "@media max-width: 400": {
+//     //   width: 300,
+//     // },
+//     // "@media orientation: landscape": {
+//     //   width: 400,
+//     //   height: 300,
+//     // },
+//   },
+// });
+
 function CVdisplay({
+  photoUrl,
   firstname,
   lastname,
   email,
@@ -36,54 +88,66 @@ function CVdisplay({
   educations,
   certificates,
   languages,
+  clauseText,
+  styleCV,
 }: CVelements) {
   return (
-    <div>
-      <p>Imię: {firstname}</p>
-      <p>Nazwisko: {lastname}</p>
-      <p>Email: {email}</p>
-      <p>Numer telefonu: {phonenumber}</p>
-      <p>Data urodzenia: {dateOfBirth}</p>
-      <p>Miasto: {city}</p>
-      <p>Opis: {description}</p>
-      <p>Umiejętności:</p>
-      {skills.map((skill) => (
-        <p key={skill.id}>{skill.value.trim()}</p>
-      ))}
-      <p>Kariera:</p>
-      {carriers.map((carrier) => (
-        <p key={carrier.id}>
-          {carrier.nameOfCompany}, {carrier.position}, {carrier.dateOfStart} -{" "}
-          {carrier.dateOfEnd}, {carrier.description}
-        </p>
-      ))}
-      <p>Wykształcenie:</p>
-      {educations.map((education) => (
-        <p key={education.id}>
-          {education.nameOfSchool}, {education.fieldOfStudy},{" "}
-          {education.dateOfStart} - {education.dateOfEnd},{" "}
-          {education.description}, {education.degree}
-        </p>
-      ))}
-      <p>Certyfikaty:</p>
-      {certificates.map((certificate) => (
-        <p key={certificate.id}>
-          {certificate.nameOfCertificate}, {certificate.year},{" "}
-          {certificate.description}
-        </p>
-      ))}
-      <p>Języki obce:</p>
-      {languages.map((language) => (
-        <p key={language.id}>
-          {language.language} - {language.level}
-        </p>
-      ))}
-      <p>Zainteresowania:</p>
-      {hobbies.map((hobby) => (
-        <p key={hobby.id}>{hobby.value.trim()}</p>
-      ))}
-      <button className="btn btn-primary">Pobierz PDF</button>
-    </div>
+    <>
+      <Document language="pl" pageLayout="singlePage">
+        <Page size="A4" style={styleCV.page}>
+          <View style={styleCV.section}>
+            {/* <div> */}
+            <Image style={styleCV.image} src={photoUrl} />
+            <Text>Imię: {firstname}</Text>
+            <Text>Nazwisko: {lastname}</Text>
+            <Text>Email: {email}</Text>
+            <Text>Numer telefonu: {phonenumber}</Text>
+            <Text>Data urodzenia: {dateOfBirth?.toLocaleDateString()}</Text>
+            <Text>Miasto: {city}</Text>
+            <Text>Opis: {description}</Text>
+            <Text>Umiejętności:</Text>
+            {skills.map((skill) => (
+              <Text key={skill.id}>{skill.value.trim()}</Text>
+            ))}
+            <Text>Kariera:</Text>
+            {carriers.map((carrier) => (
+              <Text key={carrier.id}>
+                {carrier.nameOfCompany}, {carrier.position},{" "}
+                {carrier.dateOfStart} - {carrier.dateOfEnd},{" "}
+                {carrier.description}
+              </Text>
+            ))}
+            <Text>Wykształcenie:</Text>
+            {educations.map((education) => (
+              <Text key={education.id}>
+                {education.nameOfSchool}, {education.fieldOfStudy},{" "}
+                {education.dateOfStart} - {education.dateOfEnd},{" "}
+                {education.description}, {education.degree}
+              </Text>
+            ))}
+            <Text>Certyfikaty:</Text>
+            {certificates.map((certificate) => (
+              <Text key={certificate.id}>
+                {certificate.nameOfCertificate}, {certificate.year},{" "}
+                {certificate.description}
+              </Text>
+            ))}
+            <Text>Języki obce:</Text>
+            {languages.map((language) => (
+              <Text key={language.id}>
+                {language.language} - {language.level}
+              </Text>
+            ))}
+            <Text>Zainteresowania:</Text>
+            {hobbies.map((hobby) => (
+              <Text key={hobby.id}>{hobby.value.trim()}</Text>
+            ))}
+            <Text>Klauzula: {clauseText}</Text>
+            {/* </div> */}
+          </View>
+        </Page>
+      </Document>
+    </>
   );
 }
 export default CVdisplay;

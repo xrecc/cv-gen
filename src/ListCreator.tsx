@@ -5,6 +5,7 @@ import { DayPicker, OnSelectHandler } from "react-day-picker";
 import "react-day-picker/style.css";
 
 import {
+  CVData,
   SkillSet,
   HobbySet,
   CarrierSet,
@@ -13,37 +14,8 @@ import {
   LanguageSet,
 } from "./types";
 
-interface CVData {
-  firstname: string;
-  lastname: string;
-  email: string;
-  phonenumber: number;
-  dateOfBirth?: string;
-  city: string;
-  description: string;
-  skills: SkillSet[];
-  hobbies: HobbySet[];
-  carriers: CarrierSet[];
-  educations: EducationSet[];
-  certificates: CertificateSet[];
-  languages: LanguageSet[];
-
-  onFirstnameChange: (newFirstname: string) => void;
-  onLastnameChange: (newLastname: string) => void;
-  onEmailChange: (newEmail: string) => void;
-  onPhonenumberChange: (newPhonenumber: number) => void;
-  onDateOfBirthChange: (newDateOfBirth: string) => void;
-  onCityChange: (newCity: string) => void;
-  onDescriptionChange: (newDescription: string) => void;
-  onSkillsListChange: (newSkills: SkillSet[]) => void;
-  onHobbiesListChange: (newHobbies: HobbySet[]) => void;
-  onCarriersListChange: (newCarrier: CarrierSet[]) => void;
-  onEducationsListChange: (newEducation: EducationSet[]) => void;
-  onCertificatesListChange: (newCertificate: CertificateSet[]) => void;
-  onLanguagesListChange: (newLanguage: LanguageSet[]) => void;
-}
-
 function ListCreator({
+  photoUrl,
   firstname,
   lastname,
   email,
@@ -57,6 +29,10 @@ function ListCreator({
   educations,
   certificates,
   languages,
+  clauseCompanyName,
+  clauseText,
+  styleCV,
+  onPhotoUrlChange,
   onFirstnameChange,
   onLastnameChange,
   onEmailChange,
@@ -70,21 +46,24 @@ function ListCreator({
   onEducationsListChange,
   onCertificatesListChange,
   onLanguagesListChange,
+  onClauseCompanyNameChange,
+  onClauseTextChange,
+  onStyleCVChange,
 }: CVData) {
-  const [selected, setSelected] = useState<Date>();
+  const today = new Date();
 
-  useEffect(() => {
-    const handleSelect: OnSelectHandler<Date> = (
-      selected,
-      triggerDate,
-      modifiers,
-      e
-    ) => {
-      console.log("Selected:", selected);
-      console.log("Triggered by:", triggerDate);
-    };
-  });
+  const formatDate = (date: Date) => date.toISOString().slice(0, 10);
 
+  const handleChangePhotoUrl = (e) => {
+    const photo = e.currentTarget.files?.[0] ?? null;
+
+    if (photoUrl) {
+      URL.revokeObjectURL(photoUrl);
+    }
+
+    const newUrl = URL.createObjectURL(photo);
+    onPhotoUrlChange(newUrl);
+  };
   const handleChangeFirstname = (e) => {
     onFirstnameChange(e.target.value);
   };
@@ -98,7 +77,7 @@ function ListCreator({
     onPhonenumberChange(e.target.value);
   };
   const handleChangeDateOfBirth = (e) => {
-    onDateOfBirthChange(e.target.value);
+    onDateOfBirthChange(new Date(e.target.value));
   };
   const handleChangeCity = (e) => {
     onCityChange(e.target.value);
@@ -160,6 +139,36 @@ function ListCreator({
       );
       onLanguagesListChange(newLanguage);
     };
+
+  const handleChangeClauseCompanyName = (e) => {
+    onClauseCompanyNameChange(e.target.value);
+
+    onClauseTextChange(
+      `Wyrażam zgodę na przetwarzanie moich danych osobowych przez ${clauseCompanyName} w celu prowadzenia rekrutacji na aplikowane przeze mnie stanowisko.`
+    );
+  };
+  const handleChangeClauseText = (e) => {
+    if (clauseCompanyName === "" || clauseCompanyName === null) {
+      onClauseTextChange(e.target.value);
+    }
+  };
+  const handleChangeStyleCV = (e) => {
+    const val = Number(e.currentTarget.value);
+    console.log("kliknięto");
+    if (val === 1) {
+      console.log("zmieniono na style1");
+      onStyleCVChange("style1");
+    } else if (val === 2) {
+      console.log("zmieniono na style2");
+      onStyleCVChange("style2");
+    } else if (val === 3) {
+      console.log("zmieniono na style3");
+      onStyleCVChange("style3");
+    } else if (val === 4) {
+      console.log("zmieniono na style4");
+      onStyleCVChange("style4");
+    }
+  };
 
   const addSkill = () => {
     onSkillsListChange([...skills, { id: uuidv4(), value: "" }]);
@@ -251,14 +260,82 @@ function ListCreator({
 
   return (
     <>
+      <div className="grid grid cols-1 md:grid-cols-10 gap-2 p-10">
+        <h1>Styl CV:</h1>
+        {styleCV === "style1" ? (
+          <button
+            className="btn"
+            value={1}
+            onClick={handleChangeStyleCV}
+            disabled
+          >
+            1
+          </button>
+        ) : (
+          <button className="btn" value={1} onClick={handleChangeStyleCV}>
+            1
+          </button>
+        )}
+        {styleCV === "style2" ? (
+          <button
+            className="btn"
+            value={2}
+            onClick={handleChangeStyleCV}
+            disabled
+          >
+            2
+          </button>
+        ) : (
+          <button className="btn" value={2} onClick={handleChangeStyleCV}>
+            2
+          </button>
+        )}
+        {styleCV === "style3" ? (
+          <button
+            className="btn"
+            value={3}
+            onClick={handleChangeStyleCV}
+            disabled
+          >
+            3
+          </button>
+        ) : (
+          <button className="btn" value={3} onClick={handleChangeStyleCV}>
+            3
+          </button>
+        )}
+        {styleCV === "style4" ? (
+          <button
+            className="btn"
+            value={4}
+            onClick={handleChangeStyleCV}
+            disabled
+          >
+            4
+          </button>
+        ) : (
+          <button className="btn" value={4} onClick={handleChangeStyleCV}>
+            4
+          </button>
+        )}
+      </div>
       <form className="max-w-2xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* dwa pola po pół szerokości */}
+          <fieldset className="fieldset md:col-span-2">
+            <legend className="fieldset-legend">Dodaj zdjęcie</legend>
+            <input
+              type="file"
+              accept="image/*"
+              className="file-input file-input-md w-full"
+              placeholder="Dodaj"
+              onChange={handleChangePhotoUrl}
+            ></input>
+          </fieldset>
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Imię</legend>
             <input
               className="input"
-              placeholder="Type here"
+              placeholder="Wpisz imię"
               value={firstname}
               onChange={handleChangeFirstname}
             />
@@ -268,32 +345,28 @@ function ListCreator({
             <legend className="fieldset-legend">Nazwisko</legend>
             <input
               className="input"
-              placeholder="Type here"
+              placeholder="Wpisz nazwisko"
               value={lastname}
               onChange={handleChangeLastname}
             />
             <p className="label text-error">Wymagane</p>
           </fieldset>
-
-          {/* pełna szerokość (span 2 kolumny) */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend">E-mail</legend>
             <input
               className="input"
-              placeholder="Type here"
+              placeholder="Wpisz email"
               value={email}
               onChange={handleChangeEmail}
             />
             <p className="label text-error">Wymagane</p>
           </fieldset>
-
-          {/* znów dwa półszerokości */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Numer telefonu</legend>
             <input
               className="input"
               type="number"
-              placeholder="Type here"
+              placeholder="Wpisz numer telefonu"
               value={phonenumber}
               onChange={handleChangePhonenumber}
             />
@@ -303,19 +376,11 @@ function ListCreator({
             <legend className="fieldset-legend">Data urodzenia</legend>
             <input
               className="input"
-              placeholder="Type here"
-              value={dateOfBirth}
+              type="date"
+              placeholder="Podaj datę urodzenia"
+              value={formatDate(dateOfBirth)}
+              max={formatDate(today)}
               onChange={handleChangeDateOfBirth}
-            />
-            <DayPicker
-              mode="single"
-              selected={selected}
-              onSelect={setSelected}
-              footer={
-                selected
-                  ? `Selected: ${selected.toLocaleDateString()}`
-                  : "Pick a day"
-              }
             />
             <p className="label text-error">Wymagane</p>
           </fieldset>
@@ -323,7 +388,7 @@ function ListCreator({
             <legend className="fieldset-legend">Miejscowość</legend>
             <input
               className="input"
-              placeholder="Type here"
+              placeholder="Podaj miejscowość"
               value={city}
               onChange={handleChangeCity}
             />
@@ -333,7 +398,7 @@ function ListCreator({
             <legend className="fieldset-legend">Kilka słów o sobie</legend>
             <textarea
               className="textarea w-full h-24"
-              placeholder="Bio"
+              placeholder="Podaj swój opis/cele"
               value={description}
               onChange={handleChangeDescription}
             />
@@ -347,7 +412,7 @@ function ListCreator({
                 <div key={skill.id}>
                   <input
                     className="input w-full"
-                    placeholder="Type here"
+                    placeholder="Podaj umiejętność"
                     value={skill.value}
                     onChange={handleChangeSkills(skill.id)}
                   />
@@ -380,7 +445,7 @@ function ListCreator({
                         <input
                           className="input"
                           name="nameOfCompany"
-                          placeholder="Type here"
+                          placeholder="Podaj nazwę firmy"
                           value={carrier.nameOfCompany}
                           onChange={handleChangeCarriers(
                             carrier.id,
@@ -394,7 +459,7 @@ function ListCreator({
                         <input
                           className="input"
                           name="position"
-                          placeholder="Type here"
+                          placeholder="Podaj stanowisko"
                           value={carrier.position}
                           onChange={handleChangeCarriers(
                             carrier.id,
@@ -414,9 +479,11 @@ function ListCreator({
                         </legend>
                         <input
                           className="input"
+                          type="month"
                           name="dateOfStart"
-                          placeholder="Type here"
+                          placeholder="Podaj datę rozpoczęcia"
                           value={carrier.dateOfStart}
+                          max={carrier.dateOfEnd}
                           onChange={handleChangeCarriers(
                             carrier.id,
                             "dateOfStart"
@@ -431,8 +498,10 @@ function ListCreator({
                         <input
                           className="input"
                           name="dateOfEnd"
-                          placeholder="Type here"
+                          type="month"
+                          placeholder="Podaj datę zakończenia"
                           value={carrier.dateOfEnd}
+                          min={carrier.dateOfStart}
                           onChange={handleChangeCarriers(
                             carrier.id,
                             "dateOfEnd"
@@ -450,7 +519,7 @@ function ListCreator({
                         <textarea
                           className="textarea h-24 w-full"
                           name="description"
-                          placeholder="Bio"
+                          placeholder="Podaj opis zatrudnienia"
                           value={carrier.description}
                           onChange={handleChangeCarriers(
                             carrier.id,
@@ -507,7 +576,7 @@ function ListCreator({
                         <input
                           className="input"
                           name="nameOfSchool"
-                          placeholder="Type here"
+                          placeholder="Podaj nazwę szkoły/uczelni"
                           value={education.nameOfSchool}
                           onChange={handleChangeEducations(
                             education.id,
@@ -521,7 +590,7 @@ function ListCreator({
                         <input
                           className="input"
                           name="fieldOfStudy"
-                          placeholder="Type here"
+                          placeholder="Podaj kierunek"
                           value={education.fieldOfStudy}
                           onChange={handleChangeEducations(
                             education.id,
@@ -541,9 +610,11 @@ function ListCreator({
                         </legend>
                         <input
                           className="input"
+                          type="month"
                           name="dateOfStart"
-                          placeholder="Type here"
+                          placeholder="Podaj datę rozpoczęcia"
                           value={education.dateOfStart}
+                          max={education.dateOfEnd}
                           onChange={handleChangeEducations(
                             education.id,
                             "dateOfStart"
@@ -557,9 +628,11 @@ function ListCreator({
                         </legend>
                         <input
                           className="input"
+                          type="month"
                           name="dateOfEnd"
-                          placeholder="Type here"
+                          placeholder="Podaj datę zakończenia"
                           value={education.dateOfEnd}
+                          min={education.dateOfStart}
                           onChange={handleChangeEducations(
                             education.id,
                             "dateOfEnd"
@@ -577,7 +650,7 @@ function ListCreator({
                         <textarea
                           className="textarea h-24  w-full"
                           name="description"
-                          placeholder="Bio"
+                          placeholder="Podaj opis nauki"
                           value={education.description}
                           onChange={handleChangeEducations(
                             education.id,
@@ -593,7 +666,7 @@ function ListCreator({
                         <input
                           className="input"
                           name="degree"
-                          placeholder="Type here"
+                          placeholder="Podaj stopień wykształcenia"
                           value={education.degree}
                           onChange={handleChangeEducations(
                             education.id,
@@ -644,7 +717,7 @@ function ListCreator({
                     </legend>
                     <input
                       className="input w-full"
-                      placeholder="Type here"
+                      placeholder="Podaj nazwę certyfikatu"
                       value={certificate.nameOfCertificate}
                       onChange={handleChangeCertificates(
                         certificate.id,
@@ -656,7 +729,7 @@ function ListCreator({
                     <legend className="fieldset-legend">Opis</legend>
                     <input
                       className="input w-full"
-                      placeholder="Type here"
+                      placeholder="Podaj opis certyfikatu"
                       value={certificate.description}
                       onChange={handleChangeCertificates(
                         certificate.id,
@@ -668,7 +741,7 @@ function ListCreator({
                     <legend className="fieldset-legend">Rok zdobycia</legend>
                     <input
                       className="input w-full"
-                      placeholder="Type here"
+                      placeholder="Podaj rok zdobycia certyfikatu"
                       value={certificate.year}
                       onChange={handleChangeCertificates(
                         certificate.id,
@@ -703,7 +776,7 @@ function ListCreator({
                     <legend className="fieldset-legend">Język obcy</legend>
                     <input
                       className="input w-full"
-                      placeholder="Type here"
+                      placeholder="Podaj język obcy"
                       value={language.language}
                       onChange={handleChangeLanguages(language.id, "language")}
                     />
@@ -712,7 +785,7 @@ function ListCreator({
                     <legend className="fieldset-legend">Poziom</legend>
                     <input
                       className="input w-full"
-                      placeholder="Type here"
+                      placeholder="Podaj poziom znajomości"
                       value={language.level}
                       onChange={handleChangeLanguages(language.id, "level")}
                     />
@@ -742,7 +815,7 @@ function ListCreator({
                 <div key={hobby.id}>
                   <input
                     className="input w-full"
-                    placeholder="Type here"
+                    placeholder="Podaj zainteresowanie"
                     value={hobby.value}
                     onChange={handleChangeHobbies(hobby.id)}
                   />
@@ -763,6 +836,45 @@ function ListCreator({
           >
             Dodaj zaintersowania
           </button>
+          <fieldset className="fieldset md:col-span-2">
+            <legend className="fieldset-legend">Klauzula</legend>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">
+                Nazwa firmy (jeśli specjalne dla firmy)
+              </legend>
+              <input
+                className="input"
+                placeholder="Podaj nazwę firmy"
+                value={clauseCompanyName}
+                onChange={handleChangeClauseCompanyName}
+              />
+              <p className="label text-error">Wymagane</p>
+            </fieldset>
+            {clauseCompanyName === "" || clauseCompanyName === null ? (
+              <>
+                <textarea
+                  className="textarea h-24  w-full"
+                  name="description"
+                  placeholder="Klauzula"
+                  value={clauseText}
+                  onChange={handleChangeClauseText}
+                />
+                <p className="label text-error">Wymagane</p>
+              </>
+            ) : (
+              <>
+                <textarea
+                  className="textarea h-24  w-full"
+                  name="description"
+                  placeholder="Klauzula"
+                  value={clauseText}
+                  onChange={handleChangeClauseText}
+                  disabled
+                />
+                <p className="label text-error">Wymagane {clauseCompanyName}</p>
+              </>
+            )}
+          </fieldset>
         </div>
       </form>
     </>

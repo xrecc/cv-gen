@@ -1,6 +1,6 @@
 import "./index.css";
-import { useEffect, useState } from "react";
-import ListCreator from "./ListCreator";
+import { useState } from "react";
+import FormLogic from "./FormLogic";
 import CVdisplay from "./CVdisplay";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -11,129 +11,14 @@ import {
   CertificateSet,
   LanguageSet,
 } from "./types";
-import { PDFDownloadLink, PDFViewer, StyleSheet } from "@react-pdf/renderer";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { AnimatePresence, motion } from "framer-motion";
-
-const styles = {
-  style1: StyleSheet.create({
-    image: {
-      width: "150px",
-      height: "150px",
-    },
-    page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
-      fontFamily: "Roboto",
-      fontSize: 25,
-      width: "100%",
-      height: "100%",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-      textAlign: "center",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
-    },
-  }),
-  style2: StyleSheet.create({
-    image: {
-      width: "150px",
-      height: "150px",
-    },
-    page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
-      fontFamily: "Roboto",
-      fontSize: 25,
-      width: "100%",
-      height: "100%",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-      textAlign: "left",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
-    },
-  }),
-  style3: StyleSheet.create({
-    image: {
-      width: "150px",
-      height: "150px",
-    },
-    page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
-      fontFamily: "Roboto",
-      fontSize: 25,
-      width: "100%",
-      height: "100%",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-      textAlign: "right",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
-    },
-  }),
-  style4: StyleSheet.create({
-    image: {
-      width: "300px",
-      height: "300px",
-    },
-    page: {
-      flexDirection: "row",
-      backgroundColor: "red",
-      fontFamily: "Roboto",
-      fontSize: 25,
-      width: "100%",
-      height: "100%",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-      textAlign: "center",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
-    },
-  }),
-};
+import { styles } from "./cvstyles";
 
 function MainPage() {
   const [styleCV, setStyleCV] = useState<
     "style1" | "style2" | "style3" | "style4"
   >("style1");
-  const [key, setKey] = useState<number>(0);
   const today = new Date();
   const [photoUrl, setPhotoUrl] = useState<string>("");
   const [firstname, setFirstname] = useState<string>("");
@@ -219,7 +104,7 @@ function MainPage() {
           <fieldset className="fieldset">
             <legend className="fieldset-legend mr-120">Kreator CV</legend>
 
-            <ListCreator
+            <FormLogic
               styleCV={styleCV}
               photoUrl={photoUrl}
               firstname={firstname}
@@ -230,11 +115,11 @@ function MainPage() {
               city={city}
               description={description}
               skills={skillsList}
-              hobbies={hobbiesList}
               carriers={carriersList}
               educations={educationsList}
               certificates={certificatesList}
               languages={languagesList}
+              hobbies={hobbiesList}
               clauseCompanyName={clauseCompanyName}
               clauseText={clauseText}
               onPhotoUrlChange={setPhotoUrl}
@@ -246,11 +131,11 @@ function MainPage() {
               onCityChange={setCity}
               onDescriptionChange={setDescription}
               onSkillsListChange={setSkillList}
-              onHobbiesListChange={setHobbiesList}
               onCarriersListChange={setCarriersList}
               onEducationsListChange={setEducationsList}
               onCertificatesListChange={setCertificatesList}
               onLanguagesListChange={setLangugagesList}
+              onHobbiesListChange={setHobbiesList}
               onClauseCompanyNameChange={setClauseCompanyName}
               onClauseTextChange={setClauseText}
               onStyleCVChange={setStyleCV}

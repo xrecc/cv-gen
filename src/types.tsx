@@ -8,11 +8,11 @@ export interface CVData {
   city: string;
   description: string;
   skills: SkillSet[];
-  hobbies: HobbySet[];
   carriers: CarrierSet[];
   educations: EducationSet[];
   certificates: CertificateSet[];
   languages: LanguageSet[];
+  hobbies: HobbySet[];
   clauseCompanyName?: string;
   clauseText: string;
   styleCV: string;
@@ -26,14 +26,83 @@ export interface CVData {
   onCityChange: (newCity: string) => void;
   onDescriptionChange: (newDescription: string) => void;
   onSkillsListChange: (newSkills: SkillSet[]) => void;
-  onHobbiesListChange: (newHobbies: HobbySet[]) => void;
   onCarriersListChange: (newCarrier: CarrierSet[]) => void;
   onEducationsListChange: (newEducation: EducationSet[]) => void;
   onCertificatesListChange: (newCertificate: CertificateSet[]) => void;
   onLanguagesListChange: (newLanguage: LanguageSet[]) => void;
+  onHobbiesListChange: (newHobbies: HobbySet[]) => void;
   onClauseCompanyNameChange: (newClauseCompanyName: string) => void;
   onClauseTextChange: (newClauseText: string) => void;
   onStyleCVChange: (newStyleCV: string) => void;
+}
+export interface CVDataOne {
+  photoUrl?: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phonenumber: number;
+  dateOfBirth: Date;
+  city: string;
+  description: string;
+
+  onPhotoUrlChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFirstnameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onLastnameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPhonenumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDateOfBirthChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onCityChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+export interface CVDataTwo {
+  skills: SkillSet[];
+  carriers: CarrierSet[];
+  educations: EducationSet[];
+  certificates: CertificateSet[];
+
+  onSkillsListChange: (
+    id: string
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveSkill: (id: string) => void;
+  onAddSkill: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onCarriersListChange: (
+    id: string,
+    field: keyof CarrierSet
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveCarrier: (id: string) => void;
+  onAddCarrier: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onEducationsListChange: (
+    id: string,
+    field: keyof EducationSet
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveEducation: (id: string) => void;
+  onAddEducation: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onCertificatesListChange: (
+    id: string,
+    field: keyof CertificateSet
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveCertificate: (id: string) => void;
+  onAddCertificate: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+export interface CVDataThree {
+  languages: LanguageSet[];
+  hobbies: HobbySet[];
+  clauseCompanyName?: string;
+  clauseText: string;
+
+  onLanguagesListChange: (
+    id: string,
+    field: keyof LanguageSet
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveLanguage: (id: string) => void;
+  onAddLanguage: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onHobbiesListChange: (
+    id: string
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveHobby: (id: string) => void;
+  onAddHobby: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClauseCompanyNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClauseTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 export interface SkillSet {
   id: string;

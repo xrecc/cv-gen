@@ -6,15 +6,21 @@ function Footer() {
       <nav className="grid grid-flow-col gap-4">
         <a className="link link-hover">About us</a>
         <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <a className="text-2xl">
+          <a
+            className="text-2xl"
+            target="_blank"
+            href="https://www.linkedin.com/in/sebastian-brodziński-759b73302/"
+          >
             <FaLinkedin />
           </a>
-          <a className="text-2xl">
+          <a
+            className="text-2xl"
+            target="_blank"
+            href="https://github.com/xrecc"
+          >
             <FaGithub />
           </a>
           <a className="text-2xl">

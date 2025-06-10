@@ -15,12 +15,10 @@ import {
   View,
   StyleSheet,
   Font,
+  Svg,
+  Path,
 } from "@react-pdf/renderer";
 
-Font.register({
-  family: "Roboto",
-  src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf",
-});
 interface CVelements {
   photoUrl: string;
   firstname: string;
@@ -41,6 +39,8 @@ interface CVelements {
     image: React.CSSProperties;
     page: React.CSSProperties;
     section: React.CSSProperties;
+    info: React.CSSProperties;
+    clause: React.CSSProperties;
   };
 }
 
@@ -73,6 +73,9 @@ interface CVelements {
 //   },
 // });
 
+const phoneIcon = new URL("./assets/icons/phone.png", import.meta.url).href;
+console.log("fotka 2:" + phoneIcon);
+
 function CVdisplay({
   photoUrl,
   firstname,
@@ -97,19 +100,30 @@ function CVdisplay({
         <Page size="A4" style={styleCV.page}>
           <View style={styleCV.section}>
             {/* <div> */}
-            <Image style={styleCV.image} src={photoUrl} />
-            <Text>Imię: {firstname}</Text>
-            <Text>Nazwisko: {lastname}</Text>
-            <Text>Email: {email}</Text>
-            <Text>Numer telefonu: {phonenumber}</Text>
-            <Text>Data urodzenia: {dateOfBirth?.toLocaleDateString()}</Text>
-            <Text>Miasto: {city}</Text>
-            <Text>Opis: {description}</Text>
-            <Text>Umiejętności:</Text>
+            <Image src={photoUrl} />
+            <Text style={styleCV.info}>Imię i nazwisko: </Text>{" "}
+            <Text>
+              {" "}
+              {firstname} {lastname}
+            </Text>
+            <Text style={styleCV.info}>Email: </Text>
+            <Text>{email}</Text>
+            <Text style={styleCV.info}>
+              <Image src="/icons/phone.png" />
+              Numer telefonu:{" "}
+            </Text>
+            <Text>{phonenumber}</Text>
+            <Text style={styleCV.info}>Data urodzenia: </Text>
+            <Text>{dateOfBirth?.toLocaleDateString()}</Text>
+            <Text style={styleCV.info}>Miasto: </Text>
+            <Text>{city}</Text>
+            <Text style={styleCV.info}>Opis: </Text>
+            <Text>{description}</Text>
+            <Text style={styleCV.info}>Umiejętności:</Text>
             {skills.map((skill) => (
               <Text key={skill.id}>{skill.value.trim()}</Text>
             ))}
-            <Text>Kariera:</Text>
+            <Text style={styleCV.info}>Kariera:</Text>
             {carriers.map((carrier) => (
               <Text key={carrier.id}>
                 {carrier.nameOfCompany}, {carrier.position},{" "}
@@ -117,7 +131,7 @@ function CVdisplay({
                 {carrier.description}
               </Text>
             ))}
-            <Text>Wykształcenie:</Text>
+            <Text style={styleCV.info}>Wykształcenie:</Text>
             {educations.map((education) => (
               <Text key={education.id}>
                 {education.nameOfSchool}, {education.fieldOfStudy},{" "}
@@ -125,24 +139,24 @@ function CVdisplay({
                 {education.description}, {education.degree}
               </Text>
             ))}
-            <Text>Certyfikaty:</Text>
+            <Text style={styleCV.info}>Certyfikaty:</Text>
             {certificates.map((certificate) => (
               <Text key={certificate.id}>
                 {certificate.nameOfCertificate}, {certificate.year},{" "}
                 {certificate.description}
               </Text>
             ))}
-            <Text>Języki obce:</Text>
+            <Text style={styleCV.info}>Języki obce:</Text>
             {languages.map((language) => (
               <Text key={language.id}>
                 {language.language} - {language.level}
               </Text>
             ))}
-            <Text>Zainteresowania:</Text>
+            <Text style={styleCV.info}>Zainteresowania:</Text>
             {hobbies.map((hobby) => (
               <Text key={hobby.id}>{hobby.value.trim()}</Text>
             ))}
-            <Text>Klauzula: {clauseText}</Text>
+            <Text style={styleCV.clause}>{clauseText}</Text>
             {/* </div> */}
           </View>
         </Page>

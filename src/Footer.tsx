@@ -30,8 +30,8 @@ function Footer() {
       </nav>
       <aside>
         <p>
-          Copyright © {new Date().getFullYear()} - All right reserved by
-          Sebastian Brodziński
+          Copyright © {new Date().getFullYear()} - Created by Sebastian
+          Brodziński
         </p>
       </aside>
     </footer>

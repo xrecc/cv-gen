@@ -69,6 +69,7 @@ function FormLogic({
     }
     const newUrl = URL.createObjectURL(photo);
     onPhotoUrlChange(newUrl);
+    console.log("fotka: " + newUrl);
   };
   const handleChangeFirstname = (e) => {
     const newFirstname = e.target.value;

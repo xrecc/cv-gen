@@ -100,7 +100,6 @@ function FormViewThree({
               value={clauseCompanyName}
               onChange={onClauseCompanyNameChange}
             />
-            <p className="label text-error">Wymagane</p>
           </fieldset>
           {clauseCompanyName === "" || clauseCompanyName === null ? (
             <>
@@ -111,7 +110,6 @@ function FormViewThree({
                 value={clauseText}
                 onChange={onClauseTextChange}
               />
-              <p className="label text-error">Wymagane</p>
             </>
           ) : (
             <>
@@ -123,7 +121,6 @@ function FormViewThree({
                 onChange={onClauseTextChange}
                 disabled
               />
-              <p className="label text-error">Wymagane {clauseCompanyName}</p>
             </>
           )}
         </fieldset>

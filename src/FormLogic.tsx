@@ -62,6 +62,7 @@ function FormLogic({
   };
   const today = new Date();
   const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+
   const handleChangePhotoUrl = (e) => {
     const photo = e.currentTarget.files?.[0] ?? null;
     if (photoUrl) {

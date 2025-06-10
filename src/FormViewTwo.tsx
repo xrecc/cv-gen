@@ -66,7 +66,6 @@ function FormViewTwo({
                         value={work.nameOfCompany}
                         onChange={onWorksListChange(work.id, "nameOfCompany")}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">Stanowisko</legend>
@@ -77,7 +76,6 @@ function FormViewTwo({
                         value={work.position}
                         onChange={onWorksListChange(work.id, "position")}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                   <div id={"item2" + work.id} className="carousel-item w-full">
@@ -94,7 +92,6 @@ function FormViewTwo({
                         max={work.dateOfEnd}
                         onChange={onWorksListChange(work.id, "dateOfStart")}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
@@ -109,7 +106,6 @@ function FormViewTwo({
                         min={work.dateOfStart}
                         onChange={onWorksListChange(work.id, "dateOfEnd")}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                   <div id={"item3" + work.id} className="carousel-item w-full">
@@ -122,7 +118,6 @@ function FormViewTwo({
                         value={work.description}
                         onChange={onWorksListChange(work.id, "description")}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                 </div>
@@ -177,7 +172,6 @@ function FormViewTwo({
                           "nameOfSchool"
                         )}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">Kierunek</legend>
@@ -191,7 +185,6 @@ function FormViewTwo({
                           "fieldOfStudy"
                         )}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                   <div
@@ -214,7 +207,6 @@ function FormViewTwo({
                           "dateOfStart"
                         )}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
@@ -232,7 +224,6 @@ function FormViewTwo({
                           "dateOfEnd"
                         )}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                   <div
@@ -251,7 +242,6 @@ function FormViewTwo({
                           "description"
                         )}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                     <fieldset className="fieldset  w-full">
                       <legend className="fieldset-legend">
@@ -267,7 +257,6 @@ function FormViewTwo({
                           "degree"
                         )}
                       />
-                      <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                 </div>

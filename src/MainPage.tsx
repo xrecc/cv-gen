@@ -156,32 +156,46 @@ function MainPage() {
               </motion.div>
             </AnimatePresence>
           </div>
-          <PDFDownloadLink
-            key={keyPDF}
-            document={
-              <CVdisplay
-                photoUrl={photoUrl}
-                firstname={firstname}
-                lastname={lastname}
-                email={email}
-                phonenumber={phonenumber}
-                dateOfBirth={dateOfBirth}
-                city={city}
-                description={description}
-                skills={skillsList}
-                hobbies={hobbiesList}
-                works={worksList}
-                educations={educationsList}
-                certificates={certificatesList}
-                languages={languagesList}
-                clauseText={clauseText}
-                styleCV={currentStyle}
-              />
-            }
-            fileName="CV.pdf"
-          >
-            <button className="btn btn-primary">Pobierz PDF</button>
-          </PDFDownloadLink>
+          {firstname !== "" &&
+          lastname !== "" &&
+          email !== "" &&
+          phonenumber !== 0 &&
+          city !== "" &&
+          description !== "" ? (
+            <PDFDownloadLink
+              key={keyPDF}
+              document={
+                <CVdisplay
+                  photoUrl={photoUrl}
+                  firstname={firstname}
+                  lastname={lastname}
+                  email={email}
+                  phonenumber={phonenumber}
+                  dateOfBirth={dateOfBirth}
+                  city={city}
+                  description={description}
+                  skills={skillsList}
+                  hobbies={hobbiesList}
+                  works={worksList}
+                  educations={educationsList}
+                  certificates={certificatesList}
+                  languages={languagesList}
+                  clauseText={clauseText}
+                  styleCV={currentStyle}
+                />
+              }
+              fileName="CV.pdf"
+            >
+              <button className="btn btn-primary">Pobierz PDF</button>
+            </PDFDownloadLink>
+          ) : (
+            <>
+              <button className="btn btn-primary" disabled>
+                Pobierz PDF
+              </button>
+              <p className="label text-error">Puste wymagane dane</p>
+            </>
+          )}
         </div>
       </div>
     </>

@@ -41,7 +41,7 @@ function FormViewOne({
             value={firstname}
             onChange={onFirstnameChange}
           />
-          <p className="label text-error">Wymagane</p>
+          {firstname === "" ? <p className="label text-error">Wymagane</p> : ""}
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Nazwisko</legend>
@@ -51,7 +51,7 @@ function FormViewOne({
             value={lastname}
             onChange={onLastnameChange}
           />
-          <p className="label text-error">Wymagane</p>
+          {lastname === "" ? <p className="label text-error">Wymagane</p> : ""}
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">E-mail</legend>
@@ -61,7 +61,7 @@ function FormViewOne({
             value={email}
             onChange={onEmailChange}
           />
-          <p className="label text-error">Wymagane</p>
+          {email === "" ? <p className="label text-error">Wymagane</p> : ""}
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Numer telefonu</legend>
@@ -72,7 +72,11 @@ function FormViewOne({
             value={phonenumber}
             onChange={onPhonenumberChange}
           />
-          <p className="label text-error">Wymagane</p>
+          {phonenumber === 0 ? (
+            <p className="label text-error">Wymagane</p>
+          ) : (
+            ""
+          )}
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Data urodzenia</legend>
@@ -84,7 +88,6 @@ function FormViewOne({
             max={formatDate(today)}
             onChange={onDateOfBirthChange}
           />
-          <p className="label text-error">Wymagane</p>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Miejscowość</legend>
@@ -94,7 +97,7 @@ function FormViewOne({
             value={city}
             onChange={onCityChange}
           />
-          <p className="label text-error">Wymagane</p>
+          {city === "" ? <p className="label text-error">Wymagane</p> : ""}
         </fieldset>
         <fieldset className="fieldset md:col-span-2">
           <legend className="fieldset-legend">Kilka słów o sobie</legend>
@@ -104,7 +107,11 @@ function FormViewOne({
             value={description}
             onChange={onDescriptionChange}
           />
-          <p className="label text-error">Wymagane</p>
+          {description === "" ? (
+            <p className="label text-error">Wymagane</p>
+          ) : (
+            ""
+          )}
         </fieldset>
       </div>
     </>

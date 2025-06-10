@@ -22,7 +22,7 @@ function FormViewOne({
   const formatDate = (date: Date) => date.toISOString().slice(0, 10);
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full z-50">
         <fieldset className="fieldset md:col-span-2">
           <legend className="fieldset-legend">Dodaj zdjęcie</legend>
           <input

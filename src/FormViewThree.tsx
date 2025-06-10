@@ -16,7 +16,7 @@ function FormViewThree({
 }: CVDataThree) {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full z-50">
         <fieldset className="fieldset md:col-span-2">
           <legend className="fieldset-legend">Języki</legend>
           {languages.map((language) => (
@@ -42,7 +42,7 @@ function FormViewThree({
                 </fieldset>
 
                 <button
-                  className="btn btn-error"
+                  className="btn btn-error z-100 mt-5"
                   onClick={() => onRemoveLanguage(language.id)}
                 >
                   usuń
@@ -52,7 +52,7 @@ function FormViewThree({
           ))}
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mt-5"
             onClick={onAddLanguage}
           >
             Dodaj język
@@ -71,7 +71,7 @@ function FormViewThree({
                   onChange={onHobbiesListChange(hobby.id)}
                 />
                 <button
-                  className="btn btn-error"
+                  className="btn btn-error mt-5"
                   onClick={() => onRemoveHobby(hobby.id)}
                 >
                   usuń
@@ -81,7 +81,7 @@ function FormViewThree({
           ))}
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mt-5"
             onClick={onAddHobby}
           >
             Dodaj zaintersowania

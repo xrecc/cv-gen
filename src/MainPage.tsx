@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   SkillSet,
   HobbySet,
-  CarrierSet,
+  WorkSet,
   EducationSet,
   CertificateSet,
   LanguageSet,
@@ -28,48 +28,14 @@ function MainPage() {
   const [dateOfBirth, setDateOfBirtth] = useState<Date>(today);
   const [city, setCity] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [skillsList, setSkillList] = useState<SkillSet[]>([
-    { id: uuidv4(), value: "" },
-  ]);
-  const [hobbiesList, setHobbiesList] = useState<HobbySet[]>([
-    { id: uuidv4(), value: "" },
-  ]);
-  const [carriersList, setCarriersList] = useState<CarrierSet[]>([
-    {
-      id: uuidv4(),
-      dateOfStart: "",
-      dateOfEnd: "",
-      position: "",
-      nameOfCompany: "",
-      description: "",
-    },
-  ]);
-  const [educationsList, setEducationsList] = useState<EducationSet[]>([
-    {
-      id: uuidv4(),
-      dateOfStart: "",
-      dateOfEnd: "",
-      nameOfSchool: "",
-      fieldOfStudy: "",
-      degree: "",
-      description: "",
-    },
-  ]);
-  const [certificatesList, setCertificatesList] = useState<CertificateSet[]>([
-    {
-      id: uuidv4(),
-      nameOfCertificate: "",
-      description: "",
-      year: "",
-    },
-  ]);
-  const [languagesList, setLangugagesList] = useState<LanguageSet[]>([
-    {
-      id: uuidv4(),
-      language: "",
-      level: "",
-    },
-  ]);
+  const [skillsList, setSkillList] = useState<SkillSet[]>([]);
+  const [hobbiesList, setHobbiesList] = useState<HobbySet[]>([]);
+  const [worksList, setWorksList] = useState<WorkSet[]>([]);
+  const [educationsList, setEducationsList] = useState<EducationSet[]>([]);
+  const [certificatesList, setCertificatesList] = useState<CertificateSet[]>(
+    []
+  );
+  const [languagesList, setLangugagesList] = useState<LanguageSet[]>([]);
   const [clauseCompanyName, setClauseCompanyName] = useState<string>("");
   const [clauseText, setClauseText] = useState<string>(
     "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia rekrutacji na aplikowane przeze mnie stanowisko."
@@ -88,7 +54,7 @@ function MainPage() {
     description,
     skillsList,
     hobbiesList,
-    carriersList,
+    worksList,
     educationsList,
     certificatesList,
     languagesList,
@@ -115,7 +81,7 @@ function MainPage() {
               city={city}
               description={description}
               skills={skillsList}
-              carriers={carriersList}
+              works={worksList}
               educations={educationsList}
               certificates={certificatesList}
               languages={languagesList}
@@ -131,7 +97,7 @@ function MainPage() {
               onCityChange={setCity}
               onDescriptionChange={setDescription}
               onSkillsListChange={setSkillList}
-              onCarriersListChange={setCarriersList}
+              onWorksListChange={setWorksList}
               onEducationsListChange={setEducationsList}
               onCertificatesListChange={setCertificatesList}
               onLanguagesListChange={setLangugagesList}
@@ -179,7 +145,7 @@ function MainPage() {
                     description={description}
                     skills={skillsList}
                     hobbies={hobbiesList}
-                    carriers={carriersList}
+                    works={worksList}
                     educations={educationsList}
                     certificates={certificatesList}
                     languages={languagesList}
@@ -204,7 +170,7 @@ function MainPage() {
                 description={description}
                 skills={skillsList}
                 hobbies={hobbiesList}
-                carriers={carriersList}
+                works={worksList}
                 educations={educationsList}
                 certificates={certificatesList}
                 languages={languagesList}

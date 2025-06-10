@@ -2,15 +2,15 @@ import { CVDataTwo } from "./types";
 
 function FormViewTwo({
   skills,
-  carriers,
+  works,
   educations,
   certificates,
   onSkillsListChange,
   onRemoveSkill,
   onAddSkill,
-  onCarriersListChange,
-  onRemoveCarrier,
-  onAddCarrier,
+  onWorksListChange,
+  onRemoveWork,
+  onAddWork,
   onEducationsListChange,
   onRemoveEducation,
   onAddEducation,
@@ -20,7 +20,7 @@ function FormViewTwo({
 }: CVDataTwo) {
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full z-50">
         <fieldset className="fieldset md:col-span-2">
           <legend className="fieldset-legend">Umiejętności</legend>
           {skills.map((skill) => (
@@ -33,7 +33,7 @@ function FormViewTwo({
                   onChange={onSkillsListChange(skill.id)}
                 />
                 <button
-                  className="btn btn-error"
+                  className="btn btn-error mt-5"
                   onClick={() => onRemoveSkill(skill.id)}
                 >
                   usuń
@@ -43,7 +43,7 @@ function FormViewTwo({
           ))}
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mt-5"
             onClick={onAddSkill}
           >
             Dodaj umiejętność
@@ -52,25 +52,19 @@ function FormViewTwo({
 
         <fieldset className="fieldset md:col-span-2 mt-10">
           <legend className="fieldset-legend">Kariera</legend>
-          {carriers.map((carrier) => (
+          {works.map((work) => (
             <>
-              <div key={carrier.id}>
-                <div key={carrier.id} className="carousel">
-                  <div
-                    id={"item1" + carrier.id}
-                    className="carousel-item w-full"
-                  >
+              <div key={work.id}>
+                <div key={work.id} className="carousel">
+                  <div id={"item1" + work.id} className="carousel-item w-full">
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">Nazwa firmy</legend>
                       <input
                         className="input"
                         name="nameOfCompany"
                         placeholder="Podaj nazwę firmy"
-                        value={carrier.nameOfCompany}
-                        onChange={onCarriersListChange(
-                          carrier.id,
-                          "nameOfCompany"
-                        )}
+                        value={work.nameOfCompany}
+                        onChange={onWorksListChange(work.id, "nameOfCompany")}
                       />
                       <p className="label text-error">Wymagane</p>
                     </fieldset>
@@ -80,16 +74,13 @@ function FormViewTwo({
                         className="input"
                         name="position"
                         placeholder="Podaj stanowisko"
-                        value={carrier.position}
-                        onChange={onCarriersListChange(carrier.id, "position")}
+                        value={work.position}
+                        onChange={onWorksListChange(work.id, "position")}
                       />
                       <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
-                  <div
-                    id={"item2" + carrier.id}
-                    className="carousel-item w-full"
-                  >
+                  <div id={"item2" + work.id} className="carousel-item w-full">
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
                         Data rozpoczęcia
@@ -99,12 +90,9 @@ function FormViewTwo({
                         type="month"
                         name="dateOfStart"
                         placeholder="Podaj datę rozpoczęcia"
-                        value={carrier.dateOfStart}
-                        max={carrier.dateOfEnd}
-                        onChange={onCarriersListChange(
-                          carrier.id,
-                          "dateOfStart"
-                        )}
+                        value={work.dateOfStart}
+                        max={work.dateOfEnd}
+                        onChange={onWorksListChange(work.id, "dateOfStart")}
                       />
                       <p className="label text-error">Wymagane</p>
                     </fieldset>
@@ -117,47 +105,41 @@ function FormViewTwo({
                         name="dateOfEnd"
                         type="month"
                         placeholder="Podaj datę zakończenia"
-                        value={carrier.dateOfEnd}
-                        min={carrier.dateOfStart}
-                        onChange={onCarriersListChange(carrier.id, "dateOfEnd")}
+                        value={work.dateOfEnd}
+                        min={work.dateOfStart}
+                        onChange={onWorksListChange(work.id, "dateOfEnd")}
                       />
                       <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
-                  <div
-                    id={"item3" + carrier.id}
-                    className="carousel-item w-full"
-                  >
+                  <div id={"item3" + work.id} className="carousel-item w-full">
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">Opis</legend>
                       <textarea
                         className="textarea h-24 w-full"
                         name="description"
                         placeholder="Podaj opis zatrudnienia"
-                        value={carrier.description}
-                        onChange={onCarriersListChange(
-                          carrier.id,
-                          "description"
-                        )}
+                        value={work.description}
+                        onChange={onWorksListChange(work.id, "description")}
                       />
                       <p className="label text-error">Wymagane</p>
                     </fieldset>
                   </div>
                 </div>
                 <button
-                  className="btn btn-error"
-                  onClick={() => onRemoveCarrier(carrier.id)}
+                  className="btn btn-error mt-5"
+                  onClick={() => onRemoveWork(work.id)}
                 >
                   usuń
                 </button>
                 <div className="flex w-full justify-center gap-2 py-2">
-                  <a href={"#item1" + carrier.id} className="btn btn-xs">
+                  <a href={"#item1" + work.id} className="btn btn-xs">
                     1
                   </a>
-                  <a href={"#item2" + carrier.id} className="btn btn-xs">
+                  <a href={"#item2" + work.id} className="btn btn-xs">
                     2
                   </a>
-                  <a href={"#item3" + carrier.id} className="btn btn-xs">
+                  <a href={"#item3" + work.id} className="btn btn-xs">
                     3
                   </a>
                 </div>
@@ -167,8 +149,8 @@ function FormViewTwo({
 
           <button
             type="button"
-            onClick={onAddCarrier}
-            className="btn btn-primary"
+            onClick={onAddWork}
+            className="btn btn-primary mt-5"
           >
             Dodaj firmę
           </button>
@@ -290,7 +272,7 @@ function FormViewTwo({
                   </div>
                 </div>
                 <button
-                  className="btn btn-error"
+                  className="btn btn-error mt-5"
                   onClick={() => onRemoveEducation(education.id)}
                 >
                   usuń
@@ -313,7 +295,7 @@ function FormViewTwo({
           <button
             type="button"
             onClick={onAddEducation}
-            className="btn btn-primary"
+            className="btn btn-primary mt-5"
           >
             Dodaj szkołę
           </button>
@@ -357,7 +339,7 @@ function FormViewTwo({
                   />
                 </fieldset>
                 <button
-                  className="btn btn-error"
+                  className="btn btn-error mt-5"
                   onClick={() => onRemoveCertificate(certificate.id)}
                 >
                   usuń
@@ -367,7 +349,7 @@ function FormViewTwo({
           ))}
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mt-5"
             onClick={onAddCertificate}
           >
             Dodaj certyfikaty

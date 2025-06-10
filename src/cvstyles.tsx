@@ -11,48 +11,101 @@ Font.register({
       src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-bold-webfont.ttf",
       fontWeight: "bold",
     },
+    {
+      src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-italic-webfont.ttf",
+      fontStyle: "italic",
+    },
   ],
 });
+
 export const styles = {
   style1: StyleSheet.create({
-    image: {
-      width: "150px",
-      height: "150px",
-    },
     page: {
-      flexDirection: "row",
       backgroundColor: "#E4E4E4",
       fontFamily: "Roboto",
-      fontSize: 14,
-      width: "100%",
-      height: "100%",
-      fontWeight: "normal",
+    },
+    cvTitle: {
+      fontFamily: "Roboto",
+      fontSize: 35,
+      fontWeight: "bold",
     },
     section: {
       margin: 10,
       padding: 10,
-      flexGrow: 1,
-      textAlign: "center",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
+    },
+    image: {
+      width: "99px",
+      height: "129px",
+      objectFit: "cover",
+      marginRight: 50,
+    },
+    imageIcon: {
+      marginLeft: 100,
+    },
+    personalData: {
+      fontFamily: "Roboto",
+      fontSize: 14,
+      fontWeight: "normal",
+    },
+    personalInfo: {
+      fontSize: 16,
+      fontFamily: "Roboto",
+      color: "black",
+      fontWeight: "bold",
     },
     info: {
       fontSize: 16,
       fontFamily: "Roboto",
       color: "black",
       fontWeight: "bold",
+      marginLeft: 30,
+      marginBottom: 15,
+      marginTop: 15,
+    },
+    personalDataSection: {
+      border: "1px solid black",
+      padding: 10,
+      flexDirection: "row",
+    },
+    otherDataSection: {
+      marginTop: 10,
+      fontFamily: "Roboto",
+      fontWeight: "normal",
+      fontSize: 14,
     },
     clause: {
       fontSize: 12,
       fontFamily: "Roboto",
       fontWeight: "normal",
       color: "grey",
+      fontStyle: "italic",
+      position: "absolute",
+      margin: 30,
+      bottom: 0,
+    },
+    skillSection: {
+      justifyContent: "center",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 8,
+      marginRight: 50,
+      marginLeft: 50,
+    },
+    skillText: {
+      margin: 5,
+      textAlign: "center",
+    },
+    hobbySection: {
+      justifyContent: "center",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 8,
+      marginRight: 50,
+      marginLeft: 50,
+    },
+    hobbyText: {
+      margin: 5,
+      textAlign: "center",
     },
   }),
   style2: StyleSheet.create({
@@ -73,14 +126,6 @@ export const styles = {
       padding: 10,
       flexGrow: 1,
       textAlign: "left",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
     },
   }),
   style3: StyleSheet.create({
@@ -101,14 +146,6 @@ export const styles = {
       padding: 10,
       flexGrow: 1,
       textAlign: "right",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
     },
   }),
   style4: StyleSheet.create({
@@ -129,14 +166,6 @@ export const styles = {
       padding: 10,
       flexGrow: 1,
       textAlign: "center",
-      // width: 200,
-      // "@media max-width: 400": {
-      //   width: 300,
-      // },
-      // "@media orientation: landscape": {
-      //   width: 400,
-      //   height: 300,
-      // },
     },
   }),
 };

@@ -7,7 +7,7 @@ import {
   CVData,
   SkillSet,
   HobbySet,
-  CarrierSet,
+  WorkSet,
   EducationSet,
   CertificateSet,
   LanguageSet,
@@ -27,7 +27,7 @@ function FormLogic({
   description,
   skills,
   hobbies,
-  carriers,
+  works,
   educations,
   certificates,
   languages,
@@ -44,7 +44,7 @@ function FormLogic({
   onDescriptionChange,
   onSkillsListChange,
   onHobbiesListChange,
-  onCarriersListChange,
+  onWorksListChange,
   onEducationsListChange,
   onCertificatesListChange,
   onLanguagesListChange,
@@ -69,7 +69,6 @@ function FormLogic({
     }
     const newUrl = URL.createObjectURL(photo);
     onPhotoUrlChange(newUrl);
-    console.log("fotka: " + newUrl);
   };
   const handleChangeFirstname = (e) => {
     const newFirstname = e.target.value;
@@ -112,16 +111,16 @@ function FormLogic({
     );
     onHobbiesListChange(newHobby);
   };
-  const handleChangeCarriers = (id: string, field: keyof CarrierSet) => (e) => {
-    const newCarrier = carriers.map((carrier) =>
-      carrier.id === id
+  const handleChangeWorks = (id: string, field: keyof WorkSet) => (e) => {
+    const newWork = works.map((work) =>
+      work.id === id
         ? {
-            ...carrier,
+            ...work,
             [field]: e.target.value,
           }
-        : carrier
+        : work
     );
-    onCarriersListChange(newCarrier);
+    onWorksListChange(newWork);
   };
   const handleChangeEducations =
     (id: string, field: keyof EducationSet) => (e) => {
@@ -183,9 +182,9 @@ function FormLogic({
   const addHobby = () => {
     onHobbiesListChange([...hobbies, { id: uuidv4(), value: "" }]);
   };
-  const addCarrier = () => {
-    onCarriersListChange([
-      ...carriers,
+  const addWork = () => {
+    onWorksListChange([
+      ...works,
       {
         id: uuidv4(),
         dateOfStart: "",
@@ -237,8 +236,8 @@ function FormLogic({
   const removeHobby = (id: string) => {
     onHobbiesListChange(hobbies.filter((hobby) => hobby.id !== id));
   };
-  const removeCarrier = (id: string) => {
-    onCarriersListChange(carriers.filter((carrier) => carrier.id !== id));
+  const removeWork = (id: string) => {
+    onWorksListChange(works.filter((work) => work.id !== id));
   };
   const removeEducation = (id: string) => {
     onEducationsListChange(
@@ -357,15 +356,15 @@ function FormLogic({
           <div id="form2" key={2} className="carousel-item relative w-full">
             <FormViewTwo
               skills={skills}
-              carriers={carriers}
+              works={works}
               educations={educations}
               certificates={certificates}
               onSkillsListChange={handleChangeSkills}
               onRemoveSkill={removeSkill}
               onAddSkill={addSkill}
-              onCarriersListChange={handleChangeCarriers}
-              onRemoveCarrier={removeCarrier}
-              onAddCarrier={addCarrier}
+              onWorksListChange={handleChangeWorks}
+              onRemoveWork={removeWork}
+              onAddWork={addWork}
               onEducationsListChange={handleChangeEducations}
               onRemoveEducation={removeEducation}
               onAddEducation={addEducation}
@@ -391,7 +390,7 @@ function FormLogic({
             />
           </div>
         </div>
-        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <div className="absolute left-5 right-5 top-1/2 z-10 flex -translate-y-1/2 transform justify-between">
           <a
             href={formsList[formIndex]}
             className="btn btn-primary btn-circle"

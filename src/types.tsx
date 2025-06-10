@@ -8,7 +8,7 @@ export interface CVData {
   city: string;
   description: string;
   skills: SkillSet[];
-  carriers: CarrierSet[];
+  works: WorkSet[];
   educations: EducationSet[];
   certificates: CertificateSet[];
   languages: LanguageSet[];
@@ -26,7 +26,7 @@ export interface CVData {
   onCityChange: (newCity: string) => void;
   onDescriptionChange: (newDescription: string) => void;
   onSkillsListChange: (newSkills: SkillSet[]) => void;
-  onCarriersListChange: (newCarrier: CarrierSet[]) => void;
+  onWorksListChange: (newWork: WorkSet[]) => void;
   onEducationsListChange: (newEducation: EducationSet[]) => void;
   onCertificatesListChange: (newCertificate: CertificateSet[]) => void;
   onLanguagesListChange: (newLanguage: LanguageSet[]) => void;
@@ -56,7 +56,7 @@ export interface CVDataOne {
 }
 export interface CVDataTwo {
   skills: SkillSet[];
-  carriers: CarrierSet[];
+  works: WorkSet[];
   educations: EducationSet[];
   certificates: CertificateSet[];
 
@@ -65,12 +65,12 @@ export interface CVDataTwo {
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   onRemoveSkill: (id: string) => void;
   onAddSkill: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onCarriersListChange: (
+  onWorksListChange: (
     id: string,
-    field: keyof CarrierSet
+    field: keyof WorkSet
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onRemoveCarrier: (id: string) => void;
-  onAddCarrier: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onRemoveWork: (id: string) => void;
+  onAddWork: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onEducationsListChange: (
     id: string,
     field: keyof EducationSet
@@ -114,7 +114,7 @@ export interface HobbySet {
   value: string;
 }
 
-export interface CarrierSet {
+export interface WorkSet {
   id: string;
   dateOfStart: string;
   dateOfEnd: string;
@@ -144,4 +144,39 @@ export interface LanguageSet {
   id: string;
   language: string;
   level: string;
+}
+export interface CVelements {
+  photoUrl: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phonenumber: number;
+  dateOfBirth?: Date;
+  city: string;
+  description: string;
+  skills: SkillSet[];
+  hobbies: HobbySet[];
+  works: WorkSet[];
+  educations: EducationSet[];
+  certificates: CertificateSet[];
+  languages: LanguageSet[];
+  clauseText: string;
+  styleCV: {
+    cvTitle: React.CSSProperties;
+    image: React.CSSProperties;
+    imageIcon: React.CSSProperties;
+    page: React.CSSProperties;
+    section: React.CSSProperties;
+    data: React.CSSProperties;
+    personalData: React.CSSProperties;
+    personalInfo: React.CSSProperties;
+    info: React.CSSProperties;
+    personalDataSection: React.CSSProperties;
+    otherDataSection: React.CSSProperties;
+    clause: React.CSSProperties;
+    skillSection: React.CSSProperties;
+    skillText: React.CSSProperties;
+    hobbySection: React.CSSProperties;
+    hobbyText: React.CSSProperties;
+  };
 }

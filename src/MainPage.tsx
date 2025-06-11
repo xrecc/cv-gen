@@ -14,6 +14,8 @@ import {
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { AnimatePresence, motion } from "framer-motion";
 import { styles } from "./cvstyles";
+import CVdownloader from "./CVdownloader";
+import CVStylePreview from "./CVstylePreview";
 
 function MainPage() {
   const [styleCV, setStyleCV] = useState<
@@ -42,6 +44,7 @@ function MainPage() {
   );
 
   const currentStyle = styles[styleCV];
+  console.log("styl: " + styleCV);
 
   const keyPDF = JSON.stringify({
     photoUrl,
@@ -109,32 +112,37 @@ function MainPage() {
           </fieldset>
         </div>
         <div className="divider divider-primary divider-horizontal"></div>
-        <div className="overflow-hidden card bg-base-300 rounded-box grid w-1/3 place-items-center break-words flex h-screen flex sticky top-0">
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
+        <div className="overflow-hidden card bg-base-300 rounded-box grid w-1/3 place-items-center break-words flex h-screen flex sticky relative top-0">
+          <CVStylePreview
+            photoUrl={photoUrl}
+            firstname={firstname}
+            lastname={lastname}
+            email={email}
+            phonenumber={phonenumber}
+            dateOfBirth={dateOfBirth}
+            city={city}
+            description={description}
+            skills={skillsList}
+            hobbies={hobbiesList}
+            works={worksList}
+            educations={educationsList}
+            certificates={certificatesList}
+            languages={languagesList}
+            clauseText={clauseText}
+            styleCV={styleCV}
+          />
+
+          <div className="absolute inset-x-0 bottom-0 p-2 z-10 text-center">
+            {firstname !== "" &&
+            lastname !== "" &&
+            email !== "" &&
+            phonenumber !== 0 &&
+            city !== "" &&
+            description !== "" ? (
+              <PDFDownloadLink
                 key={keyPDF}
-                initial={{ x: -600, opacity: 0 }}
-                animate={{ x: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 250 }}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  padding: 20,
-                  background: "transparent",
-                }}
-              >
-                <PDFViewer
-                  height={"1122px"}
-                  width={"794px"}
-                  showToolbar={false}
-                >
-                  <CVdisplay
+                document={
+                  <CVdownloader
                     photoUrl={photoUrl}
                     firstname={firstname}
                     lastname={lastname}
@@ -152,50 +160,20 @@ function MainPage() {
                     clauseText={clauseText}
                     styleCV={currentStyle}
                   />
-                </PDFViewer>
-              </motion.div>
-            </AnimatePresence>
+                }
+                fileName="CV.pdf"
+              >
+                <button className="btn btn-primary">Pobierz PDF</button>
+              </PDFDownloadLink>
+            ) : (
+              <>
+                <button className="btn btn-primary" disabled>
+                  Pobierz PDF
+                </button>
+                <p className="label text-error">Puste wymagane dane</p>
+              </>
+            )}
           </div>
-          {firstname !== "" &&
-          lastname !== "" &&
-          email !== "" &&
-          phonenumber !== 0 &&
-          city !== "" &&
-          description !== "" ? (
-            <PDFDownloadLink
-              key={keyPDF}
-              document={
-                <CVdisplay
-                  photoUrl={photoUrl}
-                  firstname={firstname}
-                  lastname={lastname}
-                  email={email}
-                  phonenumber={phonenumber}
-                  dateOfBirth={dateOfBirth}
-                  city={city}
-                  description={description}
-                  skills={skillsList}
-                  hobbies={hobbiesList}
-                  works={worksList}
-                  educations={educationsList}
-                  certificates={certificatesList}
-                  languages={languagesList}
-                  clauseText={clauseText}
-                  styleCV={currentStyle}
-                />
-              }
-              fileName="CV.pdf"
-            >
-              <button className="btn btn-primary">Pobierz PDF</button>
-            </PDFDownloadLink>
-          ) : (
-            <>
-              <button className="btn btn-primary" disabled>
-                Pobierz PDF
-              </button>
-              <p className="label text-error">Puste wymagane dane</p>
-            </>
-          )}
         </div>
       </div>
     </>

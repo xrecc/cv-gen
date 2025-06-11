@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @plugin "daisyui" {
   themes: betterlight --default, betterdark --prefersdark;
   root: ":root";
@@ -76,4 +81,68 @@
   --border: 1px;
   --depth: 1;
   --noise: 0;
+}
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+}
+
+@layer components {
+  .style1-a4-page {
+    @apply h-[1122px] w-[794px] bg-[#E4E4E4] pb-80 font-roboto text-black overflow-hidden relative;
+  }
+  .style1-section {
+    @apply m-[10px] p-[10px];
+  }
+  .style1-cvTitle {
+    @apply font-roboto text-[35px] font-bold;
+  }
+  .style1-image {
+    @apply h-[129px] w-[99px] object-cover mr-[0px];
+  }
+  .style1-imageIcon {
+    @apply ml-[100px] w-[16px] h-[16px];
+  }
+  .style1-personalData {
+    @apply font-roboto text-[14px] font-normal;
+  }
+  .style1-personalInfo {
+    @apply font-roboto text-[16px] font-bold text-black flex flex-row;
+  }
+  .style1-info {
+    @apply font-roboto text-[16px] font-bold text-black ml-[30px] mb-[15px] mt-[15px] flex flex-row;
+  }
+  .style1-personalDataSection {
+    @apply border border-black p-[10px] flex flex-row;
+  }
+  .style1-otherDataSection {
+    @apply mt-[10px] font-roboto text-[14px] font-normal;
+  }
+  .style1-clause {
+    @apply absolute left-30 right-30 bottom-30 font-roboto text-[12px] font-normal italic text-gray-500;
+  }
+  .style1-skillSection {
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+  }
+  .style1-skillText {
+    @apply m-[5px] text-center;
+  }
+  .style1-hobbySection {
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+  }
+  .style1-hobbyText {
+    @apply m-[5px] text-center;
+  }
+
+  .style2-a4-page {
+    @apply h-[1122px] w-[794px] bg-[#337EF5] pb-80 font-roboto text-black overflow-hidden relative;
+  }
+
+  .style3-a4-page {
+    @apply h-[1122px] w-[794px] bg-[#E7F283] pb-80 font-roboto text-black overflow-hidden relative;
+  }
+
+  .style4-a4-page {
+    @apply h-[1122px] w-[794px] bg-[#F246EA] pb-80 font-roboto text-black overflow-hidden relative;
+  }
 }

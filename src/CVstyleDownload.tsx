@@ -1,6 +1,6 @@
 import { CVelements } from "./types";
 import { Document, Page, Text, Image, View } from "@react-pdf/renderer";
-function CVStyle1({
+function CVStyleDownload({
   photoUrl,
   firstname,
   lastname,
@@ -33,30 +33,31 @@ function CVStyle1({
                   <Text style={styleCV.personalData}>
                     {firstname} {lastname}
                   </Text>
-                </Text>{" "}
+                </Text>
                 <Text style={styleCV.personalInfo}>
                   <Image src="/icons1/email.png" style={styleCV.imageIcon} />
                   Email: <Text style={styleCV.personalData}>{email}</Text>
                 </Text>
                 <Text style={styleCV.personalInfo}>
                   <Image src="/icons1/phone.png" style={styleCV.imageIcon} />
-                  Numer telefonu:{" "}
+                  Numer telefonu:
                   <Text style={styleCV.personalData}>{phonenumber}</Text>
                 </Text>
                 <Text style={styleCV.personalInfo}>
                   <Image src="/icons1/date.png" style={styleCV.imageIcon} />
-                  Data urodzenia:{" "}
+                  Data urodzenia:
                   <Text style={styleCV.personalData}>
                     {dateOfBirth?.toLocaleDateString()}
                   </Text>
                 </Text>
                 <Text style={styleCV.personalInfo}>
                   <Image src="/icons1/city.png" style={styleCV.imageIcon} />
-                  Miasto: <Text style={styleCV.personalData}>{city}</Text>
+                  Miejsce zamieszkania:{" "}
+                  <Text style={styleCV.personalData}>{city}</Text>
                 </Text>
                 <Text style={styleCV.personalInfo}>
-                  <Image src="/icons1/bio.png" style={styleCV.imageIcon} />
-                  Opis: <Text style={styleCV.personalData}>{description}</Text>
+                  <Image src="/icons1/bio.png" style={styleCV.imageIcon} />O
+                  mnie: <Text style={styleCV.personalData}>{description}</Text>
                 </Text>
               </View>
             </View>
@@ -88,8 +89,8 @@ function CVStyle1({
 
               {works.map((work) => (
                 <Text key={work.id} style={styleCV.skillText}>
-                  {work.nameOfCompany} {work.position}, {work.dateOfStart} -{" "}
-                  {work.dateOfEnd}, {work.description}
+                  {work.dateOfStart} - {work.dateOfEnd}, {work.nameOfCompany},
+                  {work.position}, {work.description}
                 </Text>
               ))}
               {educations.length > 0 ? (
@@ -103,9 +104,9 @@ function CVStyle1({
 
               {educations.map((education) => (
                 <Text key={education.id} style={styleCV.skillText}>
-                  {education.nameOfSchool}, {education.fieldOfStudy},{" "}
-                  {education.dateOfStart} - {education.dateOfEnd},{" "}
-                  {education.description}, {education.degree}
+                  {education.dateOfStart} - {education.dateOfEnd},
+                  {education.nameOfSchool}, {education.fieldOfStudy},
+                  {education.degree}, {education.description}
                 </Text>
               ))}
               {certificates.length > 0 ? (
@@ -122,7 +123,7 @@ function CVStyle1({
 
               {certificates.map((certificate) => (
                 <Text key={certificate.id} style={styleCV.skillText}>
-                  {certificate.nameOfCertificate}, {certificate.year},{" "}
+                  {certificate.year}, {certificate.nameOfCertificate},
                   {certificate.description}
                 </Text>
               ))}
@@ -163,4 +164,4 @@ function CVStyle1({
     </>
   );
 }
-export default CVStyle1;
+export default CVStyleDownload;

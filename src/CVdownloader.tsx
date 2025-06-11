@@ -2,9 +2,9 @@ import { useState } from "react";
 import { CVelements } from "./types";
 import { Document, Page, Text, Image, View } from "@react-pdf/renderer";
 import CVStyle1 from "./CVstylePreview";
-import CVStyle1preview from "./CVstylePreview";
+import CVStyleDownload from "./CVstyleDownload";
 
-function CVdisplay({
+function CVdownloader({
   photoUrl,
   firstname,
   lastname,
@@ -24,7 +24,7 @@ function CVdisplay({
 }: CVelements) {
   return (
     <>
-      <CVStyle1preview
+      <CVStyleDownload
         photoUrl={photoUrl}
         firstname={firstname}
         lastname={lastname}
@@ -45,4 +45,4 @@ function CVdisplay({
     </>
   );
 }
-export default CVdisplay;
+export default CVdownloader;

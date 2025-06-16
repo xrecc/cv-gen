@@ -161,22 +161,5 @@ export interface CVelements {
   certificates: CertificateSet[];
   languages: LanguageSet[];
   clauseText: string;
-  styleCV: {
-    cvTitle: React.CSSProperties;
-    image: React.CSSProperties;
-    imageIcon: React.CSSProperties;
-    page: React.CSSProperties;
-    section: React.CSSProperties;
-    data: React.CSSProperties;
-    personalData: React.CSSProperties;
-    personalInfo: React.CSSProperties;
-    info: React.CSSProperties;
-    personalDataSection: React.CSSProperties;
-    otherDataSection: React.CSSProperties;
-    clause: React.CSSProperties;
-    skillSection: React.CSSProperties;
-    skillText: React.CSSProperties;
-    hobbySection: React.CSSProperties;
-    hobbyText: React.CSSProperties;
-  };
+  styleCV: string;
 }

@@ -98,7 +98,7 @@
     @apply font-roboto text-[35px] font-bold;
   }
   .style1-image {
-    @apply h-[129px] w-[99px] object-cover mr-[0px];
+    @apply h-[129px] w-[99px] object-cover;
   }
   .style1-imageIcon {
     @apply ml-[100px] w-[16px] h-[16px];
@@ -120,6 +120,30 @@
   }
   .style1-clause {
     @apply absolute left-30 right-30 bottom-30 font-roboto text-[12px] font-normal italic text-gray-500;
+  }
+  .style1-workSection {
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+  }
+  .style1-workText {
+    @apply m-[5px] text-center;
+  }
+  .style1-educationSection {
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+  }
+  .style1-educationText {
+    @apply m-[5px] text-center;
+  }
+  .style1-certificateSection {
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+  }
+  .style1-certificateText {
+    @apply m-[5px] text-center;
+  }
+  .style1-languageSection {
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+  }
+  .style1-languageText {
+    @apply m-[5px] text-center;
   }
   .style1-skillSection {
     @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];

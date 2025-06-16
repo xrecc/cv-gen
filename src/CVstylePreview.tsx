@@ -1,6 +1,5 @@
 import { CVelements } from "./types";
-import { Document, Page, Text, Image, View } from "@react-pdf/renderer";
-function CVStylePreview({
+function CVstylePreview({
   photoUrl,
   firstname,
   lastname,
@@ -18,151 +17,191 @@ function CVStylePreview({
   clauseText,
   styleCV,
 }: CVelements) {
-  console.log("preview style: " + `${styleCV}-a4-page`);
   return (
     <>
       <div>
         <div className={`${styleCV}-a4-page`}>
-          <div className="style1-section">
-            <p className="style1-cvTitle">CV</p>
-            <div className="style1-personalDataSection">
-              <img src={photoUrl} className="style1-image" />
+          <div className={`${styleCV}-section`}>
+            <p className={`${styleCV}-cvTitle`}>CV</p>
+            <div className={`${styleCV}-personalDataSection`}>
+              <img src={photoUrl} className={`${styleCV}-image`} />
               <div>
-                <div className="style1-personalInfo">
-                  <img src="/icons1/name.png" className="style1-imageIcon" />
+                <div className={`${styleCV}-personalInfo`}>
+                  <img
+                    src={`/icons/${styleCV}/name.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Imię i nazwisko:
-                  <p className="style1-personalData">
+                  <p className={`${styleCV}-personalData`}>
                     {firstname} {lastname}
                   </p>
                 </div>
-                <div className="style1-personalInfo">
-                  <img src="/icons1/email.png" className="style1-imageIcon" />
+                <div className={`${styleCV}-personalInfo`}>
+                  <img
+                    src={`/icons/${styleCV}/email.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Email:
-                  <p className="style1-personalData">{email}</p>
+                  <p className={`${styleCV}-personalData`}>{email}</p>
                 </div>
-                <div className="style1-personalInfo">
-                  <img src="/icons1/phone.png" className="style1-imageIcon" />
+                <div className={`${styleCV}-personalInfo`}>
+                  <img
+                    src={`/icons/${styleCV}/phone.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Numer telefonu:
-                  <p className="style1-personalData">{phonenumber}</p>
+                  <p className={`${styleCV}-personalData`}>{phonenumber}</p>
                 </div>
-                <div className="style1-personalInfo">
-                  <img src="/icons1/date.png" className="style1-imageIcon" />
+                <div className={`${styleCV}-personalInfo`}>
+                  <img
+                    src={`/icons/${styleCV}/date.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Data urodzenia:
-                  <p className="style1-personalData">
+                  <p className={`${styleCV}-personalData`}>
                     {dateOfBirth?.toLocaleDateString()}
                   </p>
                 </div>
-                <div className="style1-personalInfo">
-                  <img src="/icons1/city.png" className="style1-imageIcon" />
+                <div className={`${styleCV}-personalInfo`}>
+                  <img
+                    src={`/icons/${styleCV}/city.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Miejsce zamieszkania:
-                  <p className="style1-personalData">{city}</p>
+                  <p className={`${styleCV}-personalData`}>{city}</p>
                 </div>
-                <div className="style1-personalInfo">
-                  <img src="/icons1/bio.png" className="style1-imageIcon" />O
-                  mnie:
-                  <p className="style1-personalData">{description}</p>
+                <div className={`${styleCV}-personalInfo`}>
+                  <img
+                    src={`/icons/${styleCV}/bio.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
+                  O mnie:
+                  <p className={`${styleCV}-personalData`}>{description}</p>
                 </div>
               </div>
             </div>
-            <div className="style1-otherDataSection">
+            <div className={`${styleCV}-otherDataSection`}>
               {skills.length > 0 ? (
-                <p className="style1-info">
-                  <img src="icons1/skill.png" className="style1-imageIcon" />
+                <p className={`${styleCV}-info`}>
+                  <img
+                    src={`icons/${styleCV}/skill.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Umiejętności
                 </p>
               ) : (
                 ""
               )}
-              <div className="style1-skillSection">
+              <div className={`${styleCV}-skillSection`}>
                 {skills.map((skill) => (
-                  <p key={skill.id} className="style1-skillText">
+                  <p key={skill.id} className={`${styleCV}-skillText`}>
                     {skill.value.trim()}
                   </p>
                 ))}
               </div>
               {works.length > 0 ? (
-                <p className="style1-info">
-                  <img src="/icons1/carrer.png" className="style1-imageIcon" />
+                <p className={`${styleCV}-info`}>
+                  <img
+                    src={`/icons/${styleCV}/carrer.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Kariera:
                 </p>
               ) : (
                 ""
               )}
-              {works.map((work) => (
-                <p key={work.id} className="style1-skillText">
-                  {work.dateOfStart} - {work.dateOfEnd}, {work.nameOfCompany},{" "}
-                  {work.position}, {work.description}
-                </p>
-              ))}
+              <div className={`${styleCV}-workSection`}>
+                {works.map((work) => (
+                  <p key={work.id} className={`${styleCV}-workText`}>
+                    {work.dateOfStart} - {work.dateOfEnd}, {work.nameOfCompany},{" "}
+                    {work.position}, {work.description}
+                  </p>
+                ))}
+              </div>
               {educations.length > 0 ? (
-                <p className="style1-info">
-                  <img src="/icons1/carrer.png" className="style1-imageIcon" />
+                <p className={`${styleCV}-info`}>
+                  <img
+                    src={`/icons/${styleCV}/school.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Wykształcenie
                 </p>
               ) : (
                 ""
               )}
-              {educations.map((education) => (
-                <p key={education.id} className="style1-skillText">
-                  {education.dateOfStart} - {education.dateOfEnd},{" "}
-                  {education.nameOfSchool}, {education.fieldOfStudy},{" "}
-                  {education.degree}, {education.description}
-                </p>
-              ))}
+              <div className={`${styleCV}-educationSection`}>
+                {educations.map((education) => (
+                  <p key={education.id} className={`${styleCV}-educationText`}>
+                    {education.dateOfStart} - {education.dateOfEnd},{" "}
+                    {education.nameOfSchool}, {education.fieldOfStudy},{" "}
+                    {education.degree}, {education.description}
+                  </p>
+                ))}
+              </div>
               {certificates.length > 0 ? (
-                <p className="style1-info">
+                <p className={`${styleCV}-info`}>
                   <img
-                    src="/icons1/certificate.png"
-                    className="style1-imageIcon"
+                    src={`/icons/${styleCV}/certificate.png`}
+                    className={`${styleCV}-imageIcon`}
                   />{" "}
                   Certyfikaty
                 </p>
               ) : (
                 ""
               )}
-              {certificates.map((certificate) => (
-                <p key={certificate.id} className="style1-skillText">
-                  {certificate.year}, {certificate.nameOfCertificate},{" "}
-                  {certificate.description}
-                </p>
-              ))}
+              <div className={`${styleCV}-certificateSection`}>
+                {certificates.map((certificate) => (
+                  <p
+                    key={certificate.id}
+                    className={`${styleCV}-certificateText`}
+                  >
+                    {certificate.year}, {certificate.nameOfCertificate},{" "}
+                    {certificate.description}
+                  </p>
+                ))}
+              </div>
               {languages.length > 0 ? (
-                <p className="style1-info">
+                <p className={`${styleCV}-info`}>
                   <img
-                    src="/icons1/language.png"
-                    className="style1-imageIcon"
+                    src={`/icons/${styleCV}/language.png"`}
+                    className={`${styleCV}-imageIcon`}
                   />{" "}
                   Języki obce
                 </p>
               ) : (
                 ""
               )}
-              {languages.map((language) => (
-                <p key={language.id} className="style1-skillText">
-                  {language.language} - {language.level}
-                </p>
-              ))}
+              <div className={`${styleCV}-languageSection`}>
+                {languages.map((language) => (
+                  <p key={language.id} className={`${styleCV}-languageText`}>
+                    {language.language} - {language.level}
+                  </p>
+                ))}
+              </div>
               {hobbies.length > 0 ? (
-                <p className="style1-info">
-                  <img src="/icons1/hobby.png" className="style1-imageIcon" />
+                <p className={`${styleCV}-info`}>
+                  <img
+                    src={`/icons/${styleCV}/hobby.png`}
+                    className={`${styleCV}-imageIcon`}
+                  />
                   Zainteresowania
                 </p>
               ) : (
                 ""
               )}
-              <div className="style1-hobbySection">
+              <div className={`${styleCV}-hobbySection`}>
                 {hobbies.map((hobby) => (
-                  <p key={hobby.id} className="style1-hobbyText">
+                  <p key={hobby.id} className={`${styleCV}-hobbyText`}>
                     {hobby.value.trim()}
                   </p>
                 ))}
               </div>
             </div>
           </div>
-          <p className="style1-clause">{clauseText}</p>
+          <p className={`${styleCV}-clause`}>{clauseText}</p>
         </div>
       </div>
     </>
   );
 }
-export default CVStylePreview;
+export default CVstylePreview;

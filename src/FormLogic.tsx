@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./index.css";
 import { v4 as uuidv4 } from "uuid";
-import { DayPicker, OnSelectHandler } from "react-day-picker";
 import "react-day-picker/style.css";
 import {
   CVData,
-  SkillSet,
-  HobbySet,
   WorkSet,
   EducationSet,
   CertificateSet,

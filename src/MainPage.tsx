@@ -11,8 +11,10 @@ import {
 } from "./types";
 import CVstylePreview from "./CVstylePreview";
 import { useReactToPrint } from "react-to-print";
+import { useTranslation } from "react-i18next";
 
 function MainPage() {
+  const { t } = useTranslation();
   const [styleCV, setStyleCV] = useState<
     "style1" | "style2" | "style3" | "style4"
   >("style1");
@@ -33,14 +35,24 @@ function MainPage() {
     []
   );
   const [languagesList, setLangugagesList] = useState<LanguageSet[]>([]);
+  const [linksList, setLinksList] = useState<LinkSet[]>([]);
   const [clauseCompanyName, setClauseCompanyName] = useState<string>("");
   const [clauseText, setClauseText] = useState<string>(
-    "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia rekrutacji na aplikowane przeze mnie stanowisko."
+    `${t("mainPage.clauseText")}`
   );
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const reactToPrintFn = useReactToPrint({ contentRef, documentTitle: "Cv" });
+  const pageStyle = `
+  @page { size: A4 portrait }
+  @media print { body { margin: 0 } }
+  `;
+
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: "Cv",
+    pageStyle: pageStyle,
+  });
 
   return (
     <>
@@ -48,7 +60,9 @@ function MainPage() {
       <div className="flex w-full">
         <div className="card bg-base-300 rounded-box grid w-2/3 overflow-hidden place-items-center">
           <fieldset className="fieldset">
-            <legend className="fieldset-legend mr-120">Kreator CV</legend>
+            <legend className="fieldset-legend mr-120">
+              {t("mainPage.title")}
+            </legend>
 
             <FormLogic
               styleCV={styleCV}
@@ -65,6 +79,7 @@ function MainPage() {
               educations={educationsList}
               certificates={certificatesList}
               languages={languagesList}
+              links={linksList}
               hobbies={hobbiesList}
               clauseCompanyName={clauseCompanyName}
               clauseText={clauseText}
@@ -81,6 +96,7 @@ function MainPage() {
               onEducationsListChange={setEducationsList}
               onCertificatesListChange={setCertificatesList}
               onLanguagesListChange={setLangugagesList}
+              onLinksListChange={setLinksList}
               onHobbiesListChange={setHobbiesList}
               onClauseCompanyNameChange={setClauseCompanyName}
               onClauseTextChange={setClauseText}
@@ -106,6 +122,7 @@ function MainPage() {
               educations={educationsList}
               certificates={certificatesList}
               languages={languagesList}
+              links={linksList}
               clauseText={clauseText}
               styleCV={styleCV}
             />
@@ -120,15 +137,17 @@ function MainPage() {
             description !== "" ? (
               <>
                 <button className="btn btn-primary" onClick={reactToPrintFn}>
-                  Pobierz PDF
+                  {t("mainPage.downloadButton")}
                 </button>
               </>
             ) : (
               <>
                 <button className="btn btn-primary" disabled>
-                  Pobierz PDF
+                  {t("mainPage.downloadButton")}
                 </button>
-                <p className="label text-error">Puste wymagane dane</p>
+                <p className="label text-error">
+                  {t("mainPage.downloadError")}
+                </p>
               </>
             )}
           </div>

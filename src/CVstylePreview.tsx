@@ -1,4 +1,5 @@
 import { CVelements } from "./types";
+import { useTranslation } from "react-i18next";
 function CVstylePreview({
   photoUrl,
   firstname,
@@ -14,69 +15,83 @@ function CVstylePreview({
   educations,
   certificates,
   languages,
+  links,
   clauseText,
   styleCV,
 }: CVelements) {
+  const { t } = useTranslation();
   return (
     <>
-      <div>
+      <div className="pdf-style">
         <div className={`${styleCV}-a4-page`}>
           <div className={`${styleCV}-section`}>
-            <p className={`${styleCV}-cvTitle`}>CV</p>
+            <p className={`${styleCV}-cvTitle`}>{t("preview.cv")}</p>
             <div className={`${styleCV}-personalDataSection`}>
               <img src={photoUrl} className={`${styleCV}-image`} />
-              <div>
-                <div className={`${styleCV}-personalInfo`}>
-                  <img
-                    src={`/icons/${styleCV}/name.png`}
-                    className={`${styleCV}-imageIcon`}
-                  />
-                  Imię i nazwisko:
-                  <p className={`${styleCV}-personalData`}>
+              <div className={`${styleCV}-personalTextSection`}>
+                <div className={`${styleCV}-personalData`}>
+                  <div className={`${styleCV}-personalInfo`}>
+                    <img
+                      src={`/src/icons/${styleCV}/name.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />
+                    {t("preview.name")}
+                  </div>
+                  <p className={`${styleCV}-personalText`}>
                     {firstname} {lastname}
                   </p>
                 </div>
-                <div className={`${styleCV}-personalInfo`}>
-                  <img
-                    src={`/icons/${styleCV}/email.png`}
-                    className={`${styleCV}-imageIcon`}
-                  />
-                  Email:
-                  <p className={`${styleCV}-personalData`}>{email}</p>
+                <div className={`${styleCV}-personalData`}>
+                  <div className={`${styleCV}-personalInfo`}>
+                    <img
+                      src={`/src/icons/${styleCV}/email.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />
+                    {t("preview.email")}
+                  </div>
+                  <p className={`${styleCV}-personalText`}>{email}</p>
                 </div>
-                <div className={`${styleCV}-personalInfo`}>
-                  <img
-                    src={`/icons/${styleCV}/phone.png`}
-                    className={`${styleCV}-imageIcon`}
-                  />
-                  Numer telefonu:
-                  <p className={`${styleCV}-personalData`}>{phonenumber}</p>
+                <div className={`${styleCV}-personalData`}>
+                  <div className={`${styleCV}-personalInfo`}>
+                    <img
+                      src={`/src/icons/${styleCV}/phone.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />
+                    {t("preview.phonenumber")}
+                  </div>
+                  <p className={`${styleCV}-personalText`}>{phonenumber}</p>
                 </div>
-                <div className={`${styleCV}-personalInfo`}>
-                  <img
-                    src={`/icons/${styleCV}/date.png`}
-                    className={`${styleCV}-imageIcon`}
-                  />
-                  Data urodzenia:
-                  <p className={`${styleCV}-personalData`}>
+                <div className={`${styleCV}-personalData`}>
+                  <div className={`${styleCV}-personalInfo`}>
+                    <img
+                      src={`/src/icons/${styleCV}/date.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />
+                    {t("preview.dateOfBirth")}
+                  </div>
+                  <p className={`${styleCV}-personalText`}>
                     {dateOfBirth?.toLocaleDateString()}
                   </p>
                 </div>
-                <div className={`${styleCV}-personalInfo`}>
-                  <img
-                    src={`/icons/${styleCV}/city.png`}
-                    className={`${styleCV}-imageIcon`}
-                  />
-                  Miejsce zamieszkania:
-                  <p className={`${styleCV}-personalData`}>{city}</p>
+                <div className={`${styleCV}-personalData`}>
+                  <div className={`${styleCV}-personalInfo`}>
+                    <img
+                      src={`/src/icons/${styleCV}/city.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />
+                    {t("preview.city")}
+                  </div>
+                  <p className={`${styleCV}-personalText`}>{city}</p>
                 </div>
-                <div className={`${styleCV}-personalInfo`}>
-                  <img
-                    src={`/icons/${styleCV}/bio.png`}
-                    className={`${styleCV}-imageIcon`}
-                  />
-                  O mnie:
-                  <p className={`${styleCV}-personalData`}>{description}</p>
+                <div className={`${styleCV}-personalData`}>
+                  <div className={`${styleCV}-personalInfo`}>
+                    <img
+                      src={`/src/icons/${styleCV}/bio.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />
+                    {t("preview.bio")}
+                  </div>
+                  <p className={`${styleCV}-personalText`}>{description}</p>
                 </div>
               </div>
             </div>
@@ -84,10 +99,10 @@ function CVstylePreview({
               {skills.length > 0 ? (
                 <p className={`${styleCV}-info`}>
                   <img
-                    src={`icons/${styleCV}/skill.png`}
+                    src={`/src/icons/${styleCV}/skill.png`}
                     className={`${styleCV}-imageIcon`}
                   />
-                  Umiejętności
+                  {t("preview.skill")}
                 </p>
               ) : (
                 ""
@@ -102,10 +117,10 @@ function CVstylePreview({
               {works.length > 0 ? (
                 <p className={`${styleCV}-info`}>
                   <img
-                    src={`/icons/${styleCV}/carrer.png`}
+                    src={`/src/icons/${styleCV}/carrer.png`}
                     className={`${styleCV}-imageIcon`}
                   />
-                  Kariera:
+                  {t("preview.work")}
                 </p>
               ) : (
                 ""
@@ -113,18 +128,26 @@ function CVstylePreview({
               <div className={`${styleCV}-workSection`}>
                 {works.map((work) => (
                   <p key={work.id} className={`${styleCV}-workText`}>
-                    {work.dateOfStart} - {work.dateOfEnd}, {work.nameOfCompany},{" "}
-                    {work.position}, {work.description}
+                    {new Intl.DateTimeFormat("pl-PL", {
+                      month: "long",
+                      year: "numeric",
+                    }).format(new Date(work.dateOfStart + "-01"))}{" "}
+                    -{" "}
+                    {new Intl.DateTimeFormat("pl-PL", {
+                      month: "long",
+                      year: "numeric",
+                    }).format(new Date(work.dateOfEnd + "-01"))}
+                    , {work.nameOfCompany}, {work.position}, {work.description}
                   </p>
                 ))}
               </div>
               {educations.length > 0 ? (
                 <p className={`${styleCV}-info`}>
                   <img
-                    src={`/icons/${styleCV}/school.png`}
+                    src={`/src/icons/${styleCV}/school.png`}
                     className={`${styleCV}-imageIcon`}
                   />
-                  Wykształcenie
+                  {t("preview.education")}
                 </p>
               ) : (
                 ""
@@ -132,8 +155,16 @@ function CVstylePreview({
               <div className={`${styleCV}-educationSection`}>
                 {educations.map((education) => (
                   <p key={education.id} className={`${styleCV}-educationText`}>
-                    {education.dateOfStart} - {education.dateOfEnd},{" "}
-                    {education.nameOfSchool}, {education.fieldOfStudy},{" "}
+                    {new Intl.DateTimeFormat("pl-PL", {
+                      month: "long",
+                      year: "numeric",
+                    }).format(new Date(education.dateOfStart + "-01"))}{" "}
+                    -{" "}
+                    {new Intl.DateTimeFormat("pl-PL", {
+                      month: "long",
+                      year: "numeric",
+                    }).format(new Date(education.dateOfEnd + "-01"))}
+                    , {education.nameOfSchool}, {education.fieldOfStudy},{" "}
                     {education.degree}, {education.description}
                   </p>
                 ))}
@@ -141,10 +172,10 @@ function CVstylePreview({
               {certificates.length > 0 ? (
                 <p className={`${styleCV}-info`}>
                   <img
-                    src={`/icons/${styleCV}/certificate.png`}
+                    src={`/src/icons/${styleCV}/certificate.png`}
                     className={`${styleCV}-imageIcon`}
                   />{" "}
-                  Certyfikaty
+                  {t("preview.certificate")}
                 </p>
               ) : (
                 ""
@@ -161,13 +192,15 @@ function CVstylePreview({
                 ))}
               </div>
               {languages.length > 0 ? (
-                <p className={`${styleCV}-info`}>
-                  <img
-                    src={`/icons/${styleCV}/language.png"`}
-                    className={`${styleCV}-imageIcon`}
-                  />{" "}
-                  Języki obce
-                </p>
+                <>
+                  <p className={`${styleCV}-info`}>
+                    <img
+                      src={`/src/icons/${styleCV}/language.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />{" "}
+                    {t("preview.language")}
+                  </p>
+                </>
               ) : (
                 ""
               )}
@@ -178,13 +211,33 @@ function CVstylePreview({
                   </p>
                 ))}
               </div>
+              {links.length > 0 ? (
+                <>
+                  <p className={`${styleCV}-info`}>
+                    <img
+                      src={`/src/icons/${styleCV}/link.png`}
+                      className={`${styleCV}-imageIcon`}
+                    />{" "}
+                    {t("preview.link")}
+                  </p>
+                </>
+              ) : (
+                ""
+              )}
+              <div className={`${styleCV}-linkSection`}>
+                {links.map((link) => (
+                  <p key={link.id} className={`${styleCV}-linkText`}>
+                    {link.link} - {link.description}
+                  </p>
+                ))}
+              </div>
               {hobbies.length > 0 ? (
                 <p className={`${styleCV}-info`}>
                   <img
-                    src={`/icons/${styleCV}/hobby.png`}
+                    src={`/src/icons/${styleCV}/hobby.png`}
                     className={`${styleCV}-imageIcon`}
                   />
-                  Zainteresowania
+                  {t("preview.hobby")}
                 </p>
               ) : (
                 ""
@@ -196,9 +249,9 @@ function CVstylePreview({
                   </p>
                 ))}
               </div>
+              <p className={`${styleCV}-clause-view`}>{clauseText}</p>
             </div>
           </div>
-          <p className={`${styleCV}-clause`}>{clauseText}</p>
         </div>
       </div>
     </>

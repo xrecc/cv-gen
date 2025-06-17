@@ -1,4 +1,5 @@
 import { CVDataTwo } from "./types";
+import { useTranslation } from "react-i18next";
 
 function FormViewTwo({
   skills,
@@ -18,17 +19,18 @@ function FormViewTwo({
   onRemoveCertificate,
   onAddCertificate,
 }: CVDataTwo) {
+  const { t } = useTranslation();
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full z-50">
         <fieldset className="fieldset md:col-span-2">
-          <legend className="fieldset-legend">Umiejętności</legend>
+          <legend className="fieldset-legend">{t("preview.skill")}</legend>
           {skills.map((skill) => (
             <>
               <div key={skill.id}>
                 <input
                   className="input w-full"
-                  placeholder="Podaj umiejętność"
+                  placeholder={t("formExtras.enterSkill")}
                   value={skill.value}
                   onChange={onSkillsListChange(skill.id)}
                 />
@@ -36,7 +38,7 @@ function FormViewTwo({
                   className="btn btn-error mt-5"
                   onClick={() => onRemoveSkill(skill.id)}
                 >
-                  usuń
+                  {t("formExtras.delete")}
                 </button>
               </div>
             </>
@@ -46,33 +48,37 @@ function FormViewTwo({
             className="btn btn-primary mt-5"
             onClick={onAddSkill}
           >
-            Dodaj umiejętność
+            {t("formExtras.addSkill")}
           </button>
         </fieldset>
 
         <fieldset className="fieldset md:col-span-2 mt-10">
-          <legend className="fieldset-legend">Kariera</legend>
+          <legend className="fieldset-legend">{t("preview.work")}</legend>
           {works.map((work) => (
             <>
               <div key={work.id}>
                 <div key={work.id} className="carousel">
                   <div id={"item1" + work.id} className="carousel-item w-full">
                     <fieldset className="fieldset w-full">
-                      <legend className="fieldset-legend">Nazwa firmy</legend>
+                      <legend className="fieldset-legend">
+                        {t("formExtras.nameOfCompany")}
+                      </legend>
                       <input
                         className="input"
                         name="nameOfCompany"
-                        placeholder="Podaj nazwę firmy"
+                        placeholder={t("formExtras.enterCompanyName")}
                         value={work.nameOfCompany}
                         onChange={onWorksListChange(work.id, "nameOfCompany")}
                       />
                     </fieldset>
                     <fieldset className="fieldset w-full">
-                      <legend className="fieldset-legend">Stanowisko</legend>
+                      <legend className="fieldset-legend">
+                        {t("formExtras.position")}
+                      </legend>
                       <input
                         className="input"
                         name="position"
-                        placeholder="Podaj stanowisko"
+                        placeholder={t("formExtras.enterPosition")}
                         value={work.position}
                         onChange={onWorksListChange(work.id, "position")}
                       />
@@ -81,13 +87,12 @@ function FormViewTwo({
                   <div id={"item2" + work.id} className="carousel-item w-full">
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
-                        Data rozpoczęcia
+                        {t("formExtras.dateOfStart")}
                       </legend>
                       <input
                         className="input"
                         type="month"
                         name="dateOfStart"
-                        placeholder="Podaj datę rozpoczęcia"
                         value={work.dateOfStart}
                         max={work.dateOfEnd}
                         onChange={onWorksListChange(work.id, "dateOfStart")}
@@ -95,13 +100,12 @@ function FormViewTwo({
                     </fieldset>
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
-                        Data zakończenia
+                        {t("formExtras.dateOfEnd")}
                       </legend>
                       <input
                         className="input"
                         name="dateOfEnd"
                         type="month"
-                        placeholder="Podaj datę zakończenia"
                         value={work.dateOfEnd}
                         min={work.dateOfStart}
                         onChange={onWorksListChange(work.id, "dateOfEnd")}
@@ -110,11 +114,13 @@ function FormViewTwo({
                   </div>
                   <div id={"item3" + work.id} className="carousel-item w-full">
                     <fieldset className="fieldset w-full">
-                      <legend className="fieldset-legend">Opis</legend>
+                      <legend className="fieldset-legend">
+                        {t("formExtras.description")}
+                      </legend>
                       <textarea
                         className="textarea h-24 w-full"
                         name="description"
-                        placeholder="Podaj opis zatrudnienia"
+                        placeholder={t("formExtras.enterJobDesc")}
                         value={work.description}
                         onChange={onWorksListChange(work.id, "description")}
                       />
@@ -125,7 +131,7 @@ function FormViewTwo({
                   className="btn btn-error mt-5"
                   onClick={() => onRemoveWork(work.id)}
                 >
-                  usuń
+                  {t("formExtras.delete")}
                 </button>
                 <div className="flex w-full justify-center gap-2 py-2">
                   <a href={"#item1" + work.id} className="btn btn-xs">
@@ -147,11 +153,11 @@ function FormViewTwo({
             onClick={onAddWork}
             className="btn btn-primary mt-5"
           >
-            Dodaj firmę
+            {t("formExtras.addCompany")}
           </button>
         </fieldset>
         <fieldset className="fieldset md:col-span-2 mt-10">
-          <legend className="fieldset-legend">Wykształcenie</legend>
+          <legend className="fieldset-legend">{t("preview.education")}</legend>
           {educations.map((education) => (
             <>
               <div key={education.id}>
@@ -161,11 +167,13 @@ function FormViewTwo({
                     className="carousel-item w-full"
                   >
                     <fieldset className="fieldset w-full">
-                      <legend className="fieldset-legend">Nazwa uczelni</legend>
+                      <legend className="fieldset-legend">
+                        {t("formExtras.nameOfSchool")}
+                      </legend>
                       <input
                         className="input"
                         name="nameOfSchool"
-                        placeholder="Podaj nazwę szkoły/uczelni"
+                        placeholder={t("formExtras.enterSchoolName")}
                         value={education.nameOfSchool}
                         onChange={onEducationsListChange(
                           education.id,
@@ -174,11 +182,13 @@ function FormViewTwo({
                       />
                     </fieldset>
                     <fieldset className="fieldset w-full">
-                      <legend className="fieldset-legend">Kierunek</legend>
+                      <legend className="fieldset-legend">
+                        {t("formExtras.fieldOfStudy")}
+                      </legend>
                       <input
                         className="input"
                         name="fieldOfStudy"
-                        placeholder="Podaj kierunek"
+                        placeholder={t("formExtras.enterField")}
                         value={education.fieldOfStudy}
                         onChange={onEducationsListChange(
                           education.id,
@@ -193,13 +203,12 @@ function FormViewTwo({
                   >
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
-                        Data rozpoczęcia
+                        {t("formExtras.dateOfStart")}
                       </legend>
                       <input
                         className="input"
                         type="month"
                         name="dateOfStart"
-                        placeholder="Podaj datę rozpoczęcia"
                         value={education.dateOfStart}
                         max={education.dateOfEnd}
                         onChange={onEducationsListChange(
@@ -210,13 +219,12 @@ function FormViewTwo({
                     </fieldset>
                     <fieldset className="fieldset w-full">
                       <legend className="fieldset-legend">
-                        Data zakończenia
+                        {t("formExtras.dateOfEnd")}
                       </legend>
                       <input
                         className="input"
                         type="month"
                         name="dateOfEnd"
-                        placeholder="Podaj datę zakończenia"
                         value={education.dateOfEnd}
                         min={education.dateOfStart}
                         onChange={onEducationsListChange(
@@ -231,11 +239,13 @@ function FormViewTwo({
                     className="carousel-item w-full"
                   >
                     <fieldset className="fieldset md:col-span-2  w-full">
-                      <legend className="fieldset-legend">Opis</legend>
+                      <legend className="fieldset-legend">
+                        {t("formExtras.description")}
+                      </legend>
                       <textarea
                         className="textarea h-24  w-full"
                         name="description"
-                        placeholder="Podaj opis nauki"
+                        placeholder={t("formExtras.enterEdDesc")}
                         value={education.description}
                         onChange={onEducationsListChange(
                           education.id,
@@ -245,12 +255,12 @@ function FormViewTwo({
                     </fieldset>
                     <fieldset className="fieldset  w-full">
                       <legend className="fieldset-legend">
-                        Stopień wykształcenia
+                        {t("formExtras.degree")}
                       </legend>
                       <input
                         className="input"
                         name="degree"
-                        placeholder="Podaj stopień wykształcenia"
+                        placeholder={t("formExtras.enterDegree")}
                         value={education.degree}
                         onChange={onEducationsListChange(
                           education.id,
@@ -264,7 +274,7 @@ function FormViewTwo({
                   className="btn btn-error mt-5"
                   onClick={() => onRemoveEducation(education.id)}
                 >
-                  usuń
+                  {t("formExtras.delete")}
                 </button>
                 <div className="flex w-full justify-center gap-2 py-2">
                   <a href={"#item1" + education.id} className="btn btn-xs">
@@ -286,19 +296,23 @@ function FormViewTwo({
             onClick={onAddEducation}
             className="btn btn-primary mt-5"
           >
-            Dodaj szkołę
+            {t("formExtras.addSchool")}
           </button>
         </fieldset>
         <fieldset className="fieldset md:col-span-2">
-          <legend className="fieldset-legend">Certyfikaty</legend>
+          <legend className="fieldset-legend">
+            {t("preview.certificate")}
+          </legend>
           {certificates.map((certificate) => (
             <>
               <div key={certificate.id}>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">Nazwa certyfikatu</legend>
+                  <legend className="fieldset-legend">
+                    {t("formExtras.nameOfCertificate")}
+                  </legend>
                   <input
                     className="input w-full"
-                    placeholder="Podaj nazwę certyfikatu"
+                    placeholder={t("formExtras.enterCertName")}
                     value={certificate.nameOfCertificate}
                     onChange={onCertificatesListChange(
                       certificate.id,
@@ -307,10 +321,12 @@ function FormViewTwo({
                   />
                 </fieldset>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">Opis</legend>
+                  <legend className="fieldset-legend">
+                    {t("formExtras.description")}
+                  </legend>
                   <input
                     className="input w-full"
-                    placeholder="Podaj opis certyfikatu"
+                    placeholder={t("formExtras.enterCertDesc")}
                     value={certificate.description}
                     onChange={onCertificatesListChange(
                       certificate.id,
@@ -319,10 +335,12 @@ function FormViewTwo({
                   />
                 </fieldset>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">Rok zdobycia</legend>
+                  <legend className="fieldset-legend">
+                    {t("formExtras.certificateYear")}
+                  </legend>
                   <input
                     className="input w-full"
-                    placeholder="Podaj rok zdobycia certyfikatu"
+                    placeholder={t("formExtras.enterCertYear")}
                     value={certificate.year}
                     onChange={onCertificatesListChange(certificate.id, "year")}
                   />
@@ -331,7 +349,7 @@ function FormViewTwo({
                   className="btn btn-error mt-5"
                   onClick={() => onRemoveCertificate(certificate.id)}
                 >
-                  usuń
+                  {t("formExtras.delete")}
                 </button>
               </div>
             </>
@@ -341,7 +359,7 @@ function FormViewTwo({
             className="btn btn-primary mt-5"
             onClick={onAddCertificate}
           >
-            Dodaj certyfikaty
+            {t("formExtras.addCertificate")}
           </button>
         </fieldset>
       </div>

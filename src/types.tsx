@@ -12,6 +12,7 @@ export interface CVData {
   educations: EducationSet[];
   certificates: CertificateSet[];
   languages: LanguageSet[];
+  links: LinkSet[];
   hobbies: HobbySet[];
   clauseCompanyName?: string;
   clauseText: string;
@@ -30,6 +31,7 @@ export interface CVData {
   onEducationsListChange: (newEducation: EducationSet[]) => void;
   onCertificatesListChange: (newCertificate: CertificateSet[]) => void;
   onLanguagesListChange: (newLanguage: LanguageSet[]) => void;
+  onLinksListChange: (newLink: LinkSet[]) => void;
   onHobbiesListChange: (newHobbies: HobbySet[]) => void;
   onClauseCompanyNameChange: (newClauseCompanyName: string) => void;
   onClauseTextChange: (newClauseText: string) => void;
@@ -86,6 +88,7 @@ export interface CVDataTwo {
 }
 export interface CVDataThree {
   languages: LanguageSet[];
+  links: LinkSet[];
   hobbies: HobbySet[];
   clauseCompanyName?: string;
   clauseText: string;
@@ -96,6 +99,12 @@ export interface CVDataThree {
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   onRemoveLanguage: (id: string) => void;
   onAddLanguage: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onLinksListChange: (
+    id: string,
+    field: keyof LinkSet
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveLink: (id: string) => void;
+  onAddLink: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onHobbiesListChange: (
     id: string
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -145,6 +154,11 @@ export interface LanguageSet {
   language: string;
   level: string;
 }
+export interface LinkSet {
+  id: string;
+  link: string;
+  description: string;
+}
 export interface CVelements {
   photoUrl: string;
   firstname: string;
@@ -160,6 +174,7 @@ export interface CVelements {
   educations: EducationSet[];
   certificates: CertificateSet[];
   languages: LanguageSet[];
+  links: LinkSet[];
   clauseText: string;
   styleCV: string;
 }

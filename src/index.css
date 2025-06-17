@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
 @tailwind base;
 @tailwind components;
@@ -85,11 +87,20 @@
 
 @theme {
   --font-roboto: "Roboto", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
+}
+
+@layer base {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
 }
 
 @layer components {
   .style1-a4-page {
-    @apply h-[1122px] w-[794px] bg-[#E4E4E4] pb-80 font-roboto text-black overflow-hidden relative;
+    @apply h-[1122px] w-[794px] bg-[#E4E4E4] pb-80 font-roboto text-black  overflow-auto relative;
+    @apply print:w-[210mm] print:h-auto print:overflow-visible;
   }
   .style1-section {
     @apply m-[10px] p-[10px];
@@ -98,68 +109,150 @@
     @apply font-roboto text-[35px] font-bold;
   }
   .style1-image {
-    @apply h-[129px] w-[99px] object-cover;
+    @apply h-[209px] w-[179px] object-cover;
   }
   .style1-imageIcon {
-    @apply ml-[100px] w-[16px] h-[16px];
+    @apply mr-[5px] w-[16px] h-[16px];
+  }
+  .style1-personalText {
+    @apply font-normal ml-[50px] mt-[5px];
   }
   .style1-personalData {
-    @apply font-roboto text-[14px] font-normal;
+    @apply font-normal flex flex-col mb-[10px];
   }
   .style1-personalInfo {
-    @apply font-roboto text-[16px] font-bold text-black flex flex-row;
+    @apply flex flex-row font-bold text-[18px];
   }
   .style1-info {
-    @apply font-roboto text-[16px] font-bold text-black ml-[30px] mb-[15px] mt-[15px] flex flex-row;
+    @apply font-roboto text-[18px] font-bold text-black flex flex-row mt-[30px] mb-[30px];
   }
   .style1-personalDataSection {
     @apply border border-black p-[10px] flex flex-row;
   }
-  .style1-otherDataSection {
-    @apply mt-[10px] font-roboto text-[14px] font-normal;
+  .style1-personalTextSection {
+    @apply ml-[50px] font-roboto font-normal;
   }
-  .style1-clause {
-    @apply absolute left-30 right-30 bottom-30 font-roboto text-[12px] font-normal italic text-gray-500;
+  .style1-otherDataSection {
+    @apply mt-[30px] ml-[70px] mt-[10px] font-roboto text-[14px] font-normal;
+  }
+  .style1-clause-view {
+    @apply mt-[20px] mr-[30px] ml-[30px] bottom-10 font-roboto text-[12px] font-normal italic text-gray-500;
   }
   .style1-workSection {
-    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+    @apply flex flex-col flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
   }
   .style1-workText {
     @apply m-[5px] text-center;
   }
   .style1-educationSection {
-    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+    @apply flex flex-col flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
   }
   .style1-educationText {
     @apply m-[5px] text-center;
   }
   .style1-certificateSection {
-    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+    @apply flex flex-col flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
   }
   .style1-certificateText {
     @apply m-[5px] text-center;
   }
   .style1-languageSection {
-    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+    @apply flex flex-col flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
   }
   .style1-languageText {
     @apply m-[5px] text-center;
   }
+  .style1-linkSection {
+    @apply flex flex-col flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
+  }
+  .style1-linkText {
+    @apply m-[5px] text-center;
+  }
   .style1-skillSection {
-    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
   }
   .style1-skillText {
     @apply m-[5px] text-center;
   }
   .style1-hobbySection {
-    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[50px] mr-[50px];
+    @apply flex flex-row flex-wrap justify-center gap-[8px] ml-[100px] mr-[100px];
   }
   .style1-hobbyText {
     @apply m-[5px] text-center;
   }
-
   .style2-a4-page {
-    @apply h-[1122px] w-[794px] bg-[#337EF5] pb-80 font-roboto text-black overflow-hidden relative;
+    @apply h-[1122px] w-[794px] bg-[#E4E4E4] pb-80 font-bebas text-black overflow-hidden relative;
+  }
+  .style2-section {
+    @apply m-[10px] p-[10px] flex flex-row;
+  }
+  .style2-cvTitle {
+    @apply absolute font-bebas font-bold text-[70px] ml-[15px];
+  }
+  .style2-image {
+    @apply h-[209px] w-[179px] object-cover mt-[100px];
+  }
+  .style2-imageIcon {
+    @apply hidden;
+  }
+  .style2-personalText {
+  }
+  .style2-personalData {
+    @apply font-normal flex flex-col mb-[10px];
+  }
+  .style2-personalInfo {
+    @apply font-bold;
+  }
+  .style2-info {
+    @apply font-bold border-b border-black text-center mb-[30px];
+  }
+  .style2-personalDataSection {
+    @apply ml-[15px] mr-[30px] border-r border-black;
+  }
+  .style2-personalTextSection {
+    @apply mt-[30px] mr-[100px];
+  }
+  .style2-otherDataSection {
+  }
+  .style2-clause-view {
+    @apply mt-[20px] mr-[30px] ml-[30px] bottom-10 font-roboto text-[12px] font-normal italic text-gray-500;
+  }
+  .style2-workSection {
+  }
+  .style2-workText {
+    @apply m-[5px];
+  }
+  .style2-educationSection {
+  }
+  .style2-educationText {
+    @apply m-[5px];
+  }
+  .style2-certificateSection {
+  }
+  .style2-certificateText {
+    @apply m-[5px];
+  }
+  .style2-languageSection {
+  }
+  .style2-languageText {
+    @apply m-[5px];
+  }
+  .style2-linkSection {
+  }
+  .style2-linkText {
+    @apply m-[5px];
+  }
+  .style2-skillSection {
+    @apply flex flex-row flex-wrap gap-[8px];
+  }
+  .style2-skillText {
+    @apply m-[5px] text-center mb-[10px] border border-dashed border-gray-500 rounded-md pl-[5px] pr-[5px] pt-[3px] pb-[3px];
+  }
+  .style2-hobbySection {
+    @apply flex flex-row flex-wrap gap-[8px];
+  }
+  .style2-hobbyText {
+    @apply m-[5px] text-center mb-[10px] border border-dashed border-gray-500 rounded-md pl-[5px] pr-[5px] pt-[3px] pb-[3px];
   }
 
   .style3-a4-page {
@@ -168,5 +261,7 @@
 
   .style4-a4-page {
     @apply h-[1122px] w-[794px] bg-[#F246EA] pb-80 font-roboto text-black overflow-hidden relative;
+  }
+  .pdf-style {
   }
 }

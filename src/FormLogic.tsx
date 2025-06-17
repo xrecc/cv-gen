@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./index.css";
 import { v4 as uuidv4 } from "uuid";
-import "react-day-picker/style.css";
+import { useTranslation } from "react-i18next";
 import {
   CVData,
   WorkSet,
   EducationSet,
   CertificateSet,
   LanguageSet,
+  LinkSet,
 } from "./types";
 import FormViewOne from "./FormViewOne";
 import FormViewTwo from "./FormViewTwo";
@@ -28,6 +29,7 @@ function FormLogic({
   educations,
   certificates,
   languages,
+  links,
   clauseCompanyName,
   clauseText,
   styleCV,
@@ -45,6 +47,7 @@ function FormLogic({
   onEducationsListChange,
   onCertificatesListChange,
   onLanguagesListChange,
+  onLinksListChange,
   onClauseCompanyNameChange,
   onClauseTextChange,
   onStyleCVChange,
@@ -145,11 +148,20 @@ function FormLogic({
       );
       onLanguagesListChange(newLanguage);
     };
+
+  const handleChangeLinks = (id: string, field: keyof LinkSet) => (e) => {
+    const newLink = links.map((link) =>
+      link.id === id ? { ...link, [field]: e.target.value } : link
+    );
+    onLinksListChange(newLink);
+  };
   const handleChangeClauseCompanyName = (e) => {
     onClauseCompanyNameChange(e.target.value);
 
     onClauseTextChange(
-      `Wyrażam zgodę na przetwarzanie moich danych osobowych przez ${clauseCompanyName} w celu prowadzenia rekrutacji na aplikowane przeze mnie stanowisko.`
+      ` ${t("formLogic.clauseTextCompany1")} ${clauseCompanyName} ${t(
+        "formLogic.clauseTextCompany2"
+      )}`
     );
   };
   const handleChangeClauseText = (e) => {
@@ -228,6 +240,16 @@ function FormLogic({
       },
     ]);
   };
+  const addLink = () => {
+    onLinksListChange([
+      ...links,
+      {
+        id: uuidv4(),
+        link: "",
+        description: "",
+      },
+    ]);
+  };
   const removeSkill = (id: string) => {
     onSkillsListChange(skills.filter((skill) => skill.id !== id));
   };
@@ -250,11 +272,16 @@ function FormLogic({
   const removeLanguage = (id: string) => {
     onLanguagesListChange(languages.filter((language) => language.id !== id));
   };
+  const removeLink = (id: string) => {
+    onLinksListChange(links.filter((link) => link.id !== id));
+  };
+
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="grid grid cols-1 md:grid-cols-10 gap-2 p-10">
-        <h1>Styl CV:</h1>
+        <h1>{t("formLogic.h1_styleCV")}</h1>
         {styleCV === "style1" ? (
           <button
             className="btn btn-primary"
@@ -374,12 +401,16 @@ function FormLogic({
           <div id="form3" key={3} className="carousel-item relative w-full">
             <FormViewThree
               languages={languages}
+              links={links}
               hobbies={hobbies}
               clauseCompanyName={clauseCompanyName}
               clauseText={clauseText}
               onLanguagesListChange={handleChangeLanguages}
               onRemoveLanguage={removeLanguage}
               onAddLanguage={addLanguage}
+              onLinksListChange={handleChangeLinks}
+              onRemoveLink={removeLink}
+              onAddLink={addLink}
               onHobbiesListChange={handleChangeHobbies}
               onRemoveHobby={removeHobby}
               onAddHobby={addHobby}

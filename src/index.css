@@ -182,6 +182,7 @@
   }
   .style2-a4-page {
     @apply h-[1122px] w-[794px] bg-[#E4E4E4] pb-80 font-bebas text-black overflow-hidden relative;
+    @apply print:w-[210mm] print:h-auto print:overflow-visible;
   }
   .style2-section {
     @apply m-[10px] p-[10px] flex flex-row;
@@ -198,19 +199,19 @@
   .style2-personalText {
   }
   .style2-personalData {
-    @apply font-normal flex flex-col mb-[10px];
+    @apply font-normal flex flex-col mb-[5px];
   }
   .style2-personalInfo {
     @apply font-bold;
   }
   .style2-info {
-    @apply font-bold border-b border-black text-center mb-[30px];
+    @apply font-bold border-b border-black text-center mb-[20px];
   }
   .style2-personalDataSection {
     @apply ml-[15px] mr-[30px] border-r border-black;
   }
   .style2-personalTextSection {
-    @apply mt-[30px] mr-[100px];
+    @apply mt-[30px] mr-[30px];
   }
   .style2-otherDataSection {
   }
@@ -246,7 +247,7 @@
     @apply flex flex-row flex-wrap gap-[8px];
   }
   .style2-skillText {
-    @apply m-[5px] text-center mb-[10px] border border-dashed border-gray-500 rounded-md pl-[5px] pr-[5px] pt-[3px] pb-[3px];
+    @apply m-[5px] text-center mb-[8px] border border-dashed border-gray-500 rounded-md pl-[5px] pr-[5px] pt-[3px] pb-[3px];
   }
   .style2-hobbySection {
     @apply flex flex-row flex-wrap gap-[8px];

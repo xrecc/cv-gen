@@ -1,5 +1,5 @@
 import "./index.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import FormLogic from "./FormLogic";
 import {
   SkillSet,
@@ -8,6 +8,7 @@ import {
   EducationSet,
   CertificateSet,
   LanguageSet,
+  LinkSet,
 } from "./types";
 import CVstylePreview from "./CVstylePreview";
 import { useReactToPrint } from "react-to-print";
@@ -40,6 +41,10 @@ function MainPage() {
   const [clauseText, setClauseText] = useState<string>(
     `${t("mainPage.clauseText")}`
   );
+
+  useEffect(() => {
+    setClauseText(`${t("mainPage.clauseText")}`);
+  }, [t]);
 
   const contentRef = useRef<HTMLDivElement>(null);
 

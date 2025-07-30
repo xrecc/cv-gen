@@ -129,15 +129,20 @@ function CVstylePreview({
                 {works.map((work) => (
                   <p key={work.id} className={`${styleCV}-workText`}>
                     {new Intl.DateTimeFormat("pl-PL", {
-                      month: "long",
+                      month: "numeric",
                       year: "numeric",
                     }).format(new Date(work.dateOfStart + "-01"))}{" "}
                     -{" "}
                     {new Intl.DateTimeFormat("pl-PL", {
-                      month: "long",
+                      month: "numeric",
                       year: "numeric",
                     }).format(new Date(work.dateOfEnd + "-01"))}
-                    , {work.nameOfCompany}, {work.position}, {work.description}
+                    <br />
+                    <strong>
+                      {work.nameOfCompany} - {work.position}
+                    </strong>
+                    <br />
+                    {work.description}
                   </p>
                 ))}
               </div>
@@ -156,16 +161,21 @@ function CVstylePreview({
                 {educations.map((education) => (
                   <p key={education.id} className={`${styleCV}-educationText`}>
                     {new Intl.DateTimeFormat("pl-PL", {
-                      month: "long",
+                      month: "numeric",
                       year: "numeric",
                     }).format(new Date(education.dateOfStart + "-01"))}{" "}
                     -{" "}
                     {new Intl.DateTimeFormat("pl-PL", {
-                      month: "long",
+                      month: "numeric",
                       year: "numeric",
                     }).format(new Date(education.dateOfEnd + "-01"))}
-                    , {education.nameOfSchool}, {education.fieldOfStudy},{" "}
-                    {education.degree}, {education.description}
+                    <br />{" "}
+                    <strong>
+                      {education.nameOfSchool} - {education.fieldOfStudy}
+                    </strong>{" "}
+                    <br />
+                    {education.degree}
+                    <br /> {education.description}
                   </p>
                 ))}
               </div>
@@ -207,7 +217,7 @@ function CVstylePreview({
               <div className={`${styleCV}-languageSection`}>
                 {languages.map((language) => (
                   <p key={language.id} className={`${styleCV}-languageText`}>
-                    {language.language} - {language.level}
+                    <strong>{language.language}</strong> - {language.level}
                   </p>
                 ))}
               </div>
@@ -227,7 +237,10 @@ function CVstylePreview({
               <div className={`${styleCV}-linkSection`}>
                 {links.map((link) => (
                   <p key={link.id} className={`${styleCV}-linkText`}>
-                    {link.link} - {link.description}
+                    <a target="_blank" href={link.link}>
+                      {link.link}
+                    </a>{" "}
+                    - <strong>{link.description}</strong>
                   </p>
                 ))}
               </div>
